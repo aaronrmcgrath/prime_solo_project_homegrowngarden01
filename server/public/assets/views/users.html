@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Garden Home Page</title>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="/assets/styles/style.css">
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="/assets/vendors/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-route.min.js"></script>
+    <script type="text/javascript" src="/assets/scripts/client.js"></script>
+    <script type="text/javascript" src="/assets/scripts/controllers.js"></script>
+    <script type="text/javascript" src="/assets/scripts/factory.js"></script>
+
+  </head>
+  <body>
+
+    <div class="instructions" ng-controller="UserController">
+        <div class="container">
+            <h1 id="welcome" class="lead">Welcome, {{userName}}!</h1>
+        </div>
+    </div>
+
+  </body>
+</html>

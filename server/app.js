@@ -11,7 +11,7 @@ var session = require('express-session');
 
 // ROUTES/CUSTOM MODULES
 var index = require('./routes/index');
-var user = require('.routes/user');
+var user = require('./routes/user');
 var register = require('./routes/register');
 
 
@@ -38,12 +38,12 @@ app.use('/', index);
 
 
 // Set Port
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8000));
 
 //Listen
-app.listen(app.get('port') function(){
+app.listen(app.get('port'), function(){
   console.log('Listening on port: ', app.get('port'));
 });
 
 
-moduel.exports = app;
+module.exports = app;

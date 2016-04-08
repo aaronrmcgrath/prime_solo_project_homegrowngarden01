@@ -13,7 +13,7 @@ passport.serializeUser(function (user, done){
 
 passport.deserializeUser(function (id, done) {
   // TODO SQL query
-  console.log(called deserializeUser);
+  console.log('called deserializeUser');
   pg.connect(connection, function (err, client) {
 
     var user = {};
@@ -39,7 +39,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 // Does acutal work of loggin user in
-pasport.use('local', new localStrategy({
+passport.use('local', new localStrategy({
   passReqToCallback: true,
   usernameField: 'username'
 }, function (req, username, password, done) {

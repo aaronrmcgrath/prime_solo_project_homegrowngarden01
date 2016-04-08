@@ -6,7 +6,7 @@ var SALT_WORK_FACTOR = 10;
 var publicAPI = {
   encryptPassword: function(password) {
     var salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
-    return bycrypt.hashSync(password, salt);
+    return bcrypt.hashSync(password, salt);
   },
   comparePassword: function(candidatePassword, storedPassword) {
     console.log('comparing passwords');

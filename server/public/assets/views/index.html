@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-pp="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Prime Kappa Solo Project: Home Grown Garden App</title>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="/assets/styles/style.css">
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="/assets/vendors/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-route.min.js"></script>
+    <script type="text/javascript" src="/assets/scripts/client.js"></script>
+    <script type="text/javascript" src="/assets/scripts/controllers.js"></script>
+    <script type="text/javascript" src="/assets/scripts/factory.js"></script>
+
+
+  </head>
+  <body>
+    <h1>HOME GROWN GARDENS</h1>
+
+    <div class="instructions">
+            <div class="container">
+                <h1 class="lead">Passport Login</h1>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Set form action and method -->
+            <form action="/" method="post">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username"/>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Log In"/>
+                    <a href="/register">Register</a>
+                </div>
+            </form>
+
+        </div>
+
+
+        <main ng-view>
+
+        </main>
+
+
+  </body>
+</html>
