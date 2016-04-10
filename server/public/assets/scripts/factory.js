@@ -1,14 +1,15 @@
 // FACTORY
 
-myApp.factory('GardenService', ['$scope', '$http', function($scope, $http) {
+myApp.factory('UserService', ['$http', function($http) {
   var newUser = {};
-  // var user = {};
+  var user = {};
 
   var getUser = function(request) {
     $http.get('/user').then(function(response) {
         if(response.data) {
-            $scope.userName = response.data.username;
-            console.log('User Data: ', $scope.userName);
+            user.username = response.data.username;
+            console.log('User Data: ', user.userName);
+            return user.username;
         } else {
             $window.location.href = '/index.html';
             //$location.path = '/';

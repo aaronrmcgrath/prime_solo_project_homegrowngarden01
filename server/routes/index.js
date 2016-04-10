@@ -7,11 +7,11 @@ var path = require('path');
 
 // Post - handles user log in, Is successful or is not...
 router.post('/', passport.authenticate('local', {
-  successRedirect: '/users/',
+  successRedirect: '/users',
   failureRedirect: '/' // Can add a failure to login page here
 }));
 
-// User Get
+User Get
 router.get('/users', function(req, res, next) {
   res.sendFile(path.resolve(__dirname, '../public/assets/views/users.html'));
 });

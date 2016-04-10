@@ -9,13 +9,13 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/assets/views/users.html',
         controller: 'UserController'
       }).
-      when('/register', {
-        templateUrl: '/assets/views/register.html',
-        controller: 'RegUserController'
-      }).
-      when('/login', {
-        templateUrl: 'assets/views/index.html'
-      }).
+      // when('/register', {
+      //   templateUrl: '/assets/views/register.html',
+      //   controller: 'RegUserController'
+      // }).
+      // when('/login', {
+      //   templateUrl: 'assets/views/index.html'
+      // }).
       otherwise({
         reditrectTo: '/home'
       });
