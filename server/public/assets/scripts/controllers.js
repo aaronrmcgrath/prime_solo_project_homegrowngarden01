@@ -1,21 +1,26 @@
 // CONTROLLERS
 
-myApp.controller('UserController', ['$scope', 'GardenService', function($scope, GardenService) {
+myApp.controller('UserController', ['$scope', 'DataService', function($scope, DataService) {
 
 
-  var gardenService = GardenService;
+  var dataService = DataService;
 
-  gardenService.getUser();
+  dataService.getUser();
 
-  $scope.test = "Hi!"
-
-  $scope.user = gardenService.user;
-  console.log('Controller userObject *: ', $scope.userObject);
+  // dataService.getGarden();
 
 
-  $scope.submit = function() {
-    gardenService.getUser();
-  };
+  // $scope.test = "Hi!"
+
+  $scope.user = dataService.user;
+  console.log('Controller userObject *: ', $scope.user);
+
+
+
+
+  // $scope.submit = function() {
+  //   gardenService.getUser();
+  // };
 
 //     $scope.userName;
 //

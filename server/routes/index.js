@@ -7,8 +7,8 @@ var path = require('path');
 
 // Post - handles user log in, Is successful or is not...
 router.post('/', passport.authenticate('local', {
-  successRedirect: '/assets/views/users.html',
-  failureRedirect: '/' // Can add a failure to login page here
+  successRedirect: '/assets/views/routes/user.html',
+  failureRedirect: '/assets/views/routes/failure.html' // Can add a failure to login page here
 }));
 
 //User Get
