@@ -5,7 +5,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.
-      when('/user', {
+      when('/users', {
         templateUrl: '/assets/views/users.html',
         controller: 'UserController'
       }).

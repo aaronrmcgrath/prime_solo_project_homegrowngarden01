@@ -8,6 +8,7 @@ var passport = require('passport');
 router.get('/', function(req, res) {
   // Is the user logged in?
   if(req.isAuthenticated()) {
+    console.log('from user.js ***: ', req.user);
     // send back user object from DB
     res.send(req.user);
   } else {

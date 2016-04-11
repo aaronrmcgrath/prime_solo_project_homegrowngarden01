@@ -6,9 +6,11 @@ myApp.factory('UserService', ['$http', function($http) {
 
   var getUser = function(request) {
     $http.get('/user').then(function(response) {
+
+      console.log(response.data);
         if(response.data) {
             user.username = response.data.username;
-            console.log('User Data: ', user.userName);
+            console.log('User Name: ', user.userName);
             return user.username;
         } else {
             $window.location.href = '/index.html';

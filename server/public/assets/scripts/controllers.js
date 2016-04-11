@@ -5,6 +5,8 @@ myApp.controller('UserController', ['$scope', 'UserService', function($scope, Us
   var userObject = {};
   var gardenService = UserService;
 
+  gardenService.getUser();
+
   $scope.submit = function() {
     gardenService.getUser();
   };
