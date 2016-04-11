@@ -1,11 +1,17 @@
 // CONTROLLERS
 
-myApp.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+myApp.controller('UserController', ['$scope', 'GardenService', function($scope, GardenService) {
 
-  var userObject = {};
-  var gardenService = UserService;
+
+  var gardenService = GardenService;
 
   gardenService.getUser();
+
+  $scope.test = "Hi!"
+
+  $scope.user = gardenService.user;
+  console.log('Controller userObject *: ', $scope.userObject);
+
 
   $scope.submit = function() {
     gardenService.getUser();

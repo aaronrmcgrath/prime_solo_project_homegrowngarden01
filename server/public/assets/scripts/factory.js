@@ -1,21 +1,21 @@
 // FACTORY
 
-myApp.factory('UserService', ['$http', function($http) {
+myApp.factory('GardenService', ['$http', '$window', function($http, $window) {
   var newUser = {};
-  var user = {};
+  var userData = {};
 
   var getUser = function(request) {
     $http.get('/user').then(function(response) {
 
-      console.log(response.data);
-        if(response.data) {
-            user.username = response.data.username;
-            console.log('User Name: ', user.userName);
-            return user.username;
-        } else {
-            $window.location.href = '/index.html';
+      console.log('***', response.data);
+        // if(response.data) {
+            userData.response = response.data;
+            // user.id = response.data.id;
+            console.log('User: ', userData);
+        // } else {
+            // $window.location.href = 'assets/views/index.html';
             //$location.path = '/';
-        }
+        // }
     });
   }
 
@@ -27,12 +27,13 @@ myApp.factory('UserService', ['$http', function($http) {
     });
   };
 
+// console.log('!!! User Log in Factory: ', userData);
 
   return {
     postUser: postUser,
     getUser: getUser,
     newUser: newUser,
-    user: user
+    user: userData
 
   }
 
