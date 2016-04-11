@@ -5,15 +5,16 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
 
   var dataService = DataService;
 
-  dataService.getUser();
+  // dataService.getUser();
 
-  // dataService.getGarden();
 
 
   // $scope.test = "Hi!"
-
+  console.log('DATASERVICE IN CONTROLLER!!!: ', dataService.user);
   $scope.user = dataService.user;
   console.log('Controller userObject *: ', $scope.user);
+
+  // dataService.getGarden($scope.user.id);
 
 
 

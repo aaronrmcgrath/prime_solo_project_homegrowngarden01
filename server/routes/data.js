@@ -7,18 +7,22 @@ var pg = require('pg');
 
 
 // GET for Garden Data
-router.get('/', function (req, res) {
+router.get('/:id', function (req, res) {
 
-  // var userID = req.params.id;
-  console.log(req.params.id);
-  /*var results = [];
+  var userID = parseInt(req.params.id);
+  console.log('*SERVER userID for getGarden:', userID);
+  var results = [];
 
   pg.connect(connectionString, function(err, client, done) {
-    var query = client.query('SELECT * FROM gardens WHERE user = $1', [userID]);
+    var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1', [userID]);
 
     query.on('row', function(row) {
       results.push(row);
       console.log('Server Garden GET! :', results);
+    });
+
+    query.on('err', function(err) {
+      console.log(err);
     });
     query.on('end', function() {
       done();
@@ -32,7 +36,6 @@ router.get('/', function (req, res) {
 
   // res.send(res.data);
   // console.log('Server Garden GET! :', res.data);
-  */
 });
 
 
