@@ -13,6 +13,7 @@ var session = require('express-session');
 var index = require('./routes/index');
 var user = require('./routes/user');
 var register = require('./routes/register');
+var login = require('./routes/login');
 var data = require('./routes/data')
 
 
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/register', register);
+app.use('/login', login);
 app.use('/user', user);
 app.use('/data', data);
 app.use('/', index);

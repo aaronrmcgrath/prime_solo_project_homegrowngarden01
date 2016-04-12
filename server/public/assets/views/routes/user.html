@@ -5,29 +5,38 @@
     <title>Garden Home Page</title>
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="/assets/styles/style.css">
+    <link rel="stylesheet" href="/assets/vendors/angular-material/angular-material.min.css">
+    <!-- <link rel="stylesheet" href="/assets/styles/style.css"> -->
 
 
     <!-- SCRIPTS -->
-    <script type="text/javascript" src="/assets/vendors/angular.min.js"></script>
-    <script type="text/javascript" src="/assets/vendors/angular-route.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-material/angular-material.min.js"></script>
+    <script type="text/javascript" src="/assets/vendors/angular-route/angular-route.min.js"></script>
+
+    <!-- MY SCRIPTS -->
     <script type="text/javascript" src="/assets/scripts/client.js"></script>
     <script type="text/javascript" src="/assets/scripts/controllers.js"></script>
     <script type="text/javascript" src="/assets/scripts/factory.js"></script>
 
   </head>
-  <body>
+  <body ng-cloak>
+    <ng-include src="'/assets/views/partials/userheader.html'"></ng-include>
+    <ng-include src="'/assets/views/partials/navbar.html'"></ng-include>
 
-    <div class="instructions" ng-controller="UserController">
-        <div class="container" >
-            <h1 id="welcome" class="lead">Welcome, {{user.res.username}}!</h1>
-        </div>
+    <div class="garden" ng-controller="UserController">
 
         <div>
             <h3 id="garden" > {{ user.res.username }}'s Garden</h3>
             <p ng-repeat="garden in gardens.res" > {{ garden.plant_name }} </p>
         </div>
     </div>
+
+    <main ng-view ng-cloak>
+    </main>
 
   </body>
 </html>

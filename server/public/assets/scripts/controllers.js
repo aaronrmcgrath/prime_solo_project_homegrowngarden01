@@ -40,7 +40,3 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
 
 
 }]);
-
-myApp.controller('RegUserController', ['$scope', 'GardenService', function($scope, GardenService) {
-  console.log('Register!');
-}]);

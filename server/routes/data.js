@@ -13,26 +13,38 @@ router.get('/:id', function (req, res) {
   console.log('*SERVER userID for getGarden:', userID);
   var results = [];
 
+  // TODO NEED TO STOP SERVER FROM CRASHING WHEN USER ISN'T LOGGED IN
+
+  // if(userID === undefined) {
+  //   router.get('/', function(req, res) {
+  //     console.log('User not logged in');
+  //     return res.send('User not logged in');
+  //   });
+  // };
+
   pg.connect(connectionString, function(err, client, done) {
     // var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1;', [userID]);
 
-    var query = client.query('SELECT plants.plant_name, gardens.name FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
+    var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
 
-    query.on('row', function(row) {
-      results.push(row);
-      console.log('Server Garden GET! :', results);
-    });
 
-    query.on('err', function(err) {
-      console.log(err);
-    });
-    query.on('end', function() {
-      done();
-      return res.json(results);
-    });
-    if(err) {
-      console.log(err);
-    }
+
+      query.on('row', function(row) {
+        results.push(row);
+        console.log('Server Garden GET! :', results);
+      });
+
+      query.on('err', function(err) {
+        console.log(err);
+      });
+      query.on('end', function() {
+        done();
+        return res.json(results);
+      });
+      if(err) {
+        console.log(err);
+
+      }
   });
 
 
