@@ -3,7 +3,7 @@
 myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   // var newUser = {};
   var userData = {};
-  var gardensArray = [];
+  var gardens = {};
 
   var getUser = function(req) {
     $http.get('/user').then(function(res) {
@@ -23,29 +23,29 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
   var getGarden = function(userID) {
     $http.get('/data/' + userID).then(function(res) {
-      console.log('Here is the GARDEN: ', res.data);
-      gardensArray = res.data;
-      console.log('*! -- gardensArray!!: ', gardensArray);
+      // console.log('Here is the GARDEN: ', res.data);
+      gardens.res = res.data;
+      console.log('*! -- gardens!!: ', gardens);
     });
   };
 
 
-  var postUser = function (data) {
-    $http.post('/register').then(function (res) {
-      newUser.data = res.data;
-      console.log('Here is the newUser obj: ', newUser.data);
-      return newUser.data;
-    });
-  };
+  // var postUser = function (data) {
+  //   $http.post('/register').then(function (res) {
+  //     newUser.data = res.data;
+  //     console.log('Here is the newUser obj: ', newUser.data);
+  //     return newUser.data;
+  //   });
+  // };
 
 // console.log('!!! User Log in Factory: ', userData);
 
   getUser();
 
   return {
-    postUser: postUser,
     getUser: getUser,
     getGarden: getGarden,
+    gardens: gardens,
     user: userData
 
   }

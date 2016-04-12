@@ -8,11 +8,12 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   // dataService.getUser();
 
 
-
-  // $scope.test = "Hi!"
-  console.log('DATASERVICE IN CONTROLLER!!!: ', dataService.user);
+  // console.log('DATASERVICE IN CONTROLLER!!!: ', dataService.user);
   $scope.user = dataService.user;
+  console.log();
+  $scope.gardens = dataService.gardens;
   console.log('Controller userObject *: ', $scope.user);
+  console.log('*** ===!> Controller gardens: ', $scope.gardens);
 
   // dataService.getGarden($scope.user.id);
 

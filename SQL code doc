@@ -42,4 +42,23 @@ CREATE TABLE "public"."garden_plants" (
 );
 
 
+// Selecting a specific plant from plants Table when it matches a users Garden
+
+SELECT plant_name
+FROM plants
+JOIN garden_plants
+ON plants.id = garden_plants.plant
+JOIN gardens
+ON garden_plants.garden = gardens.id
+WHERE gardens.user = 1;
+
+// Selecting plants from garden
+
+SELECT * FROM plants
+JOIN garden_plants
+ON plants.id = garden_plants.plant
+JOIN gardens
+ON garden_plants.garden = gardens.id
+WHERE gardens.user = 1;
+
 //
