@@ -68,7 +68,7 @@ router.get('/:id', function (req, res) {
           console.log('Error inserting data: ', err);
           res.send(false);
         } else {
-          res.send(result);
+          res.json(result); // Sending back An object in an array in an object as a key of res in the mother object... work on later
         }
       });
     });
