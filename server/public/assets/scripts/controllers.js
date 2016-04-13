@@ -2,11 +2,9 @@
 
 myApp.controller('UserController', ['$scope', 'DataService', function($scope, DataService) {
 
-
   var dataService = DataService;
 
   // dataService.getUser();
-
 
   // console.log('DATASERVICE IN CONTROLLER!!!: ', dataService.user);
   $scope.user = dataService.user;
@@ -16,9 +14,6 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   console.log('*** ===!> Controller gardens: ', $scope.gardens);
 
   // dataService.getGarden($scope.user.id);
-
-
-
 
   // $scope.submit = function() {
   //   gardenService.getUser();
@@ -38,5 +33,20 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
 //         }
 //     });
 
+
+}]);
+
+
+myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope, DataService) {
+
+  var dataService = DataService;
+  var createPlantObj = {};
+
+
+  $scope.submit = function(data) {
+    dataService.postPlant(data);
+    console.log('CONTORLLER - HERE IS postPlant data: ', data);
+    // console.log('CONTROLLER - createPlantObj: ', createPlantObj);
+  };
 
 }]);

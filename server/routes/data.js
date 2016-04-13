@@ -29,22 +29,50 @@ router.get('/:id', function (req, res) {
 
 
 
-      query.on('row', function(row) {
-        results.push(row);
-        console.log('Server Garden GET! :', results);
-      });
+    query.on('row', function(row) {
+      results.push(row);
+      console.log('Server Garden GET! :', results);
+    });
 
-      query.on('err', function(err) {
-        console.log(err);
-      });
-      query.on('end', function() {
+    query.on('err', function(err) {
+      console.log(err);
+    });
+
+    query.on('end', function() {
+      done();
+      return res.json(results);
+    });
+    if(err) {
+      console.log(err);
+
+    }
+  });
+
+
+  // POST for creating new plant in DB for all...
+  router.post('/', function(req, res, next){
+
+    var savePlant = {
+      plant_name: req.body.plant_name
+    };
+    var results = [];
+
+    console.log('@SERVER data.js ready to save to DB:', savePlant);
+
+    pg.connect(connectionString, function(err, client, done){
+      client.query('INSERT INTO plants (plant_name) VALUES ($1) RETURNING id, plant_name;', [savePlant.plant_name],
+      function (err, result) {
         done();
-        return res.json(results);
-      });
-      if(err) {
-        console.log(err);
 
-      }
+        if(err) {
+          console.log('Error inserting data: ', err);
+          res.send(false);
+        } else {
+          res.send(result);
+        }
+      });
+    });
+
   });
 
 

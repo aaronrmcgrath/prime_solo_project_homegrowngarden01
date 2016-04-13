@@ -1,0 +1,7 @@
+<div class="garden" ng-controller="UserController">
+
+    <div>
+        <h3 id="garden" > {{ user.res.username }}'s Garden</h3>
+        <p ng-repeat="garden in gardens.res" > {{ garden.plant_name }} </p>
+    </div>
+</div>

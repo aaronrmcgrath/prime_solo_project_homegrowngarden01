@@ -4,6 +4,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   // var newUser = {};
   var userData = {};
   var gardens = {};
+  var newPlant = {};
 
   var getUser = function(req) {
     $http.get('/user').then(function(res) {
@@ -29,6 +30,14 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     });
   };
 
+  var postPlant = function(createPlant) {
+    console.log('@FACTORY- createPlant: ', createPlant);
+    $http.post('/data', createPlant).then(function(res) {
+      newPlant.res = res.data;
+      console.log('!FACTORY***: ', newPlant);
+    });
+  };
+
 
   // var postUser = function (data) {
   //   $http.post('/register').then(function (res) {
@@ -45,7 +54,9 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   return {
     getUser: getUser,
     getGarden: getGarden,
+    postPlant: postPlant,
     gardens: gardens,
+    newPlant: newPlant,
     user: userData
 
   }

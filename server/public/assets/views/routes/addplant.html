@@ -15,12 +15,12 @@
 
 
       <md-tab label="create">
-        <form name="userForm">
+        <form ng-submit="submit(createPlantObj)" name="userForm">
 
           <div layout-gt-xs="row" layout="column" layout-align="center center">
             <md-input-container class="md-block" flex-gt-xs>
               <label>Plant Name</label>
-              <input ng-model="plant.plant_name">
+              <input ng-model="createPlantObj.plant_name">
             </md-input-container>
 
             <md-select placeholder="Plant Type" ng-model="plant" md-on-open="loadUsers()" layout-gt-xs="row">
@@ -37,10 +37,10 @@
               <label>Description</label>
               <input ng-model="plant.description">
             </md-input-container>
-
-            <md-button class="md-raised md-primary submit">Create</md-button>
-
           </div>
+
+          <md-button type="submit" class="md-raised md-primary submit">Create</md-button>
+
         </form>
 
       </md-tab>
