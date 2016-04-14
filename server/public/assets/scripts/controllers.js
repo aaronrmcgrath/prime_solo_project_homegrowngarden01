@@ -42,6 +42,11 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
   var dataService = DataService;
   var createPlantObj = {};
 
+  // dataService.getFormDetails();
+  $scope.formDetails = dataService.formInfo;
+  console.log('### --- CONTROLLER formDetails: ', $scope.formDetails);
+
+
 
   $scope.submit = function(data) {
     dataService.postPlant(data);

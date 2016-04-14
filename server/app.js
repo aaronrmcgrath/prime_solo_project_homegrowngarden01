@@ -14,7 +14,8 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var register = require('./routes/register');
 var login = require('./routes/login');
-var data = require('./routes/data')
+var data = require('./routes/data');
+var form = require('./routes/form');
 
 
 app.use(bodyParser.json());
@@ -38,6 +39,7 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/user', user);
 app.use('/data', data);
+app.use('/form', form);
 app.use('/', index);
 
 

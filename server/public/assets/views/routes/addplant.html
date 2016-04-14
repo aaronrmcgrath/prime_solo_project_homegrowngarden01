@@ -16,6 +16,7 @@
 
       <md-tab label="create">
         <form ng-submit="submit(createPlantObj)" name="userForm">
+          <div>
 
           <div layout-gt-xs="row" layout="column" layout-align="center center">
             <md-input-container class="md-block" flex-gt-xs>
@@ -23,21 +24,28 @@
               <input ng-model="createPlantObj.plant_name">
             </md-input-container>
 
-            <md-select placeholder="Plant Type" ng-model="plant" md-on-open="loadUsers()" layout-gt-xs="row">
-              <md-option ng-value="type" ng-repeat="type in plant_type">{{plant_type.type}}</md-option>
-            </md-select>
-
             <md-input-container class="md-block" flex-gt-xs>
               <label>Variety</label>
-              <input ng-model="plant.plant_variety">
+              <input ng-model="createPlantObj.plant_variety">
             </md-input-container>
           </div>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Description</label>
-              <input ng-model="plant.description">
+              <input ng-model="createPlantObj.description">
             </md-input-container>
           </div>
+          <div layout-get-xs="row" layout="column">
+            <label>Date Planted</label>
+            <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date"></md-datepicker>
+          </div>
+          <div>
+            <md-select placeholder="Plant Type" ng-model="createPlantObj.type" md-on-open="getFormDetails()" layout-gt-xs="row">
+              <md-option ng-value="type" ng-repeat="type in formDetails.res">{{type.type}}</md-option>
+            </md-select>
+          </div>
+
+        </div>
 
           <md-button type="submit" class="md-raised md-primary submit">Create</md-button>
 

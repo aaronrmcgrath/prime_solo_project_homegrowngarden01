@@ -25,9 +25,11 @@ router.get('/:id', function (req, res) {
   pg.connect(connectionString, function(err, client, done) {
     // var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1;', [userID]);
 
-    var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
+    // var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
 
-
+    // LEFT JOIN to grab everything and GROUP BY user.id and garden.id then aggregate the plant data
+    var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user = $1;', [userID]);
+    // need to try and add a GROUP BY gardens.id at some point -- this did work for getting info back: * GROUP BY gardens.id, gardens.name, plants.plant_name, garden_plants.id *
 
     query.on('row', function(row) {
       results.push(row);
@@ -53,14 +55,17 @@ router.get('/:id', function (req, res) {
   router.post('/', function(req, res, next){
 
     var savePlant = {
-      plant_name: req.body.plant_name
+      plant_name: req.body.plant_name,
+      plant_type: req.body.type.id,
+      plant_variety: req.body.plant_variety,
+      description: req.body.description
     };
     var results = [];
 
     console.log('@SERVER data.js ready to save to DB:', savePlant);
 
     pg.connect(connectionString, function(err, client, done){
-      client.query('INSERT INTO plants (plant_name) VALUES ($1) RETURNING id, plant_name;', [savePlant.plant_name],
+      client.query('INSERT INTO plants (plant_name, plant_type, plant_variety, description) VALUES ($1, $2, $3, $4) RETURNING id;', [savePlant.plant_name, savePlant.plant_type, savePlant.plant_variety, savePlant.description],
       function (err, result) {
         done();
 
@@ -68,7 +73,8 @@ router.get('/:id', function (req, res) {
           console.log('Error inserting data: ', err);
           res.send(false);
         } else {
-          res.json(result); // Sending back An object in an array in an object as a key of res in the mother object... work on later
+          console.log(result.rows);
+          res.json(result.rows); // Sending back An object in an array in an object as a key of res in the mother object... work on later
         }
       });
     });
