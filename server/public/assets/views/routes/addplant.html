@@ -8,11 +8,11 @@
 
           <form class="container search">
             <label>SEARCH</label>
-            <input id="search" type="text" ng-model="userSearch" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
+            <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }"  ng-change="getSearch(search)" placeholder="Search Plants"/>
           </form>
 
-          <div>
-            <p> {{ userSearch }} </p>
+          <div ng-repeat="plant in searchResults.results">
+            <p> {{ plant.plant_name }} </p>
           </div>
 
           <!-- <div ng-repeat>
@@ -49,9 +49,11 @@
             <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date"></md-datepicker>
           </div>
           <div>
+
             <md-select placeholder="Plant Type" ng-model="createPlantObj.type" md-on-open="getFormDetails()" layout-gt-xs="row">
               <md-option ng-value="type" ng-repeat="type in formDetails.res">{{type.type}}</md-option>
             </md-select>
+
           </div>
 
         </div>

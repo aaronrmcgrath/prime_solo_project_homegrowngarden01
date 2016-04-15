@@ -9,6 +9,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var newPlant = {};
   var gardenID = 0;
   var userSearch = '';
+  var searchResults = {};
 
   var getUser = function(req) {
     $http.get('/user').then(function(res) {
@@ -94,10 +95,14 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
   var getSearch = function(userSearch) {
     console.log('%% ## $$ @FACTORY, userSearch: ', userSearch);
-    // $http.get('/search').then(function(res) {
-    //   console.log('*** SEARCH RESULTS: ', res);
-    // });
-  }
+    if(userSearch.length > 0){
+      $http.get('/search/' + userSearch).then(function(res) {
+        console.log('*** SEARCH RESULTS: ', res);
+        searchResults.results = res.data;
+        console.log('!* # # @FACTORY searchResults: ', searchResults);
+      });
+    };
+  };
 
 
 
@@ -122,6 +127,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     formInfo: formInfo,
     newPlant: newPlant,
     getSearch: getSearch,
+    searchResults: searchResults,
     user: userData
 
   }

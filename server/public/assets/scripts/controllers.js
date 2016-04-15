@@ -42,10 +42,14 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
   var dataService = DataService;
   var createPlantObj = {};
 
-  $scope.userSearch = '';
+  $scope.search = '';
 
-  console.log('@CONTROLLER, $scope.userSearch: ', $scope.userSearch);
-  dataService.getSearch($scope.userSearch);
+  console.log('@CONTROLLER, $scope.search: ', $scope.search);
+  $scope.getSearch = function (search) {
+    dataService.getSearch(search);
+  };
+
+  $scope.searchResults = dataService.searchResults;
 
 
   // dataService.getFormDetails();
