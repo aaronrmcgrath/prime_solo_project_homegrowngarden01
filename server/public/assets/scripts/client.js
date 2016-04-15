@@ -24,7 +24,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         controller: 'AddPlantController'
       }).
       otherwise({
-        reditrectTo: '/garden'
+        redirectTo: '/garden'
       });
 }]);
 
