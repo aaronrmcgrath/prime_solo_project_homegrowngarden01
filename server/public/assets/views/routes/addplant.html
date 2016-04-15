@@ -8,8 +8,17 @@
 
           <form class="container search">
             <label>SEARCH</label>
-            <input type="text" ng-model="search.param" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
+            <input id="search" type="text" ng-model="userSearch" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
           </form>
+
+          <div>
+            <p> {{ userSearch }} </p>
+          </div>
+
+          <!-- <div ng-repeat>
+            <p> {{ searchResults.params }} </p>
+          </div> -->
+
         </md-content>
       </md-tab>
 

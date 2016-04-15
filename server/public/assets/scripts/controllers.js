@@ -42,6 +42,12 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
   var dataService = DataService;
   var createPlantObj = {};
 
+  $scope.userSearch = '';
+
+  console.log('@CONTROLLER, $scope.userSearch: ', $scope.userSearch);
+  dataService.getSearch($scope.userSearch);
+
+
   // dataService.getFormDetails();
   $scope.formDetails = dataService.formInfo;
   console.log('### --- CONTROLLER formDetails: ', $scope.formDetails);

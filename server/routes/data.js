@@ -50,41 +50,42 @@ router.get('/:id', function (req, res) {
     }
   });
 
-
-  // POST for creating new plant in DB for all...
-  router.post('/', function(req, res, next){
-
-    var savePlant = {
-      plant_name: req.body.plant_name,
-      plant_type: req.body.type.id,
-      plant_variety: req.body.plant_variety,
-      description: req.body.description
-    };
-    var results = [];
-
-    console.log('@SERVER data.js ready to save to DB:', savePlant);
-
-    pg.connect(connectionString, function(err, client, done){
-      client.query('INSERT INTO plants (plant_name, plant_type, plant_variety, description) VALUES ($1, $2, $3, $4) RETURNING id;', [savePlant.plant_name, savePlant.plant_type, savePlant.plant_variety, savePlant.description],
-      function (err, result) {
-        done();
-
-        if(err) {
-          console.log('Error inserting data: ', err);
-          res.send(false);
-        } else {
-          console.log(result.rows);
-          res.json(result.rows); // Sending back An object in an array in an object as a key of res in the mother object... work on later
-        }
-      });
-    });
-
-  });
-
-
   // res.send(res.data);
   // console.log('Server Garden GET! :', res.data);
 });
+
+
+
+// POST for creating new plant in DB for all...
+router.post('/', function(req, res, next){
+
+  var savePlant = {
+    plant_name: req.body.plant_name,
+    plant_type: req.body.type.id,
+    plant_variety: req.body.plant_variety,
+    description: req.body.description
+  };
+  var results = [];
+
+  console.log('@SERVER data.js ready to save to DB:', savePlant);
+
+  pg.connect(connectionString, function(err, client, done){
+    client.query('INSERT INTO plants (plant_name, plant_type, plant_variety, description) VALUES ($1, $2, $3, $4) RETURNING id;', [savePlant.plant_name, savePlant.plant_type, savePlant.plant_variety, savePlant.description],
+    function (err, result) {
+      done();
+
+      if(err) {
+        console.log('Error inserting data: ', err);
+        res.send(false);
+      } else {
+        console.log(result.rows);
+        res.json(result.rows); // Sending back An object in an array in an object as a key of res in the mother object... work on later
+      }
+    });
+  });
+
+});
+
 
 
 module.exports = router;

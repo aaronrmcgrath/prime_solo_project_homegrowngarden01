@@ -16,6 +16,8 @@ var register = require('./routes/register');
 var login = require('./routes/login');
 var data = require('./routes/data');
 var form = require('./routes/form');
+var gardenPlants = require('./routes/gardenplants');
+var search = require('./routes/search');
 
 
 app.use(bodyParser.json());
@@ -40,6 +42,8 @@ app.use('/login', login);
 app.use('/user', user);
 app.use('/data', data);
 app.use('/form', form);
+app.use('/gardenplants', gardenPlants);
+app.use('/search', search);
 app.use('/', index);
 
 

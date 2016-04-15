@@ -3,10 +3,12 @@
 myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   // var newUser = {};
   var userData = {};
+  var userID = 0;
   var gardens = {};
   var formInfo = {};
   var newPlant = {};
   var gardenID = 0;
+  var userSearch = '';
 
   var getUser = function(req) {
     $http.get('/user').then(function(res) {
@@ -14,7 +16,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       // console.log('***', res.data);
       // if(res.data) {
       userData.res = res.data;
-      getGarden(userData.res.id);
+      userID = userData.res.id;
+      getGarden(userID);
       getFormDetails();
       // user.id = res.data.id;
       console.log('User: ', userData);
@@ -61,15 +64,40 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   }
 
   var postPlant = function(createPlant) {
-    createPlant.garden_id = gardens.res.id;
-    createPlant.date_planted = createPlant.date_planted;
+    createPlant.garden_id = gardens.res.garden_id;
+    // createPlant.date_planted = createPlant.date_planted;
     console.log('@FACTORY- createPlant: ', createPlant);
+
     $http.post('/data', createPlant).then(function(res) {
-      newPlant.res = res.data;
+      newPlant.res = createPlant;
+
+      newPlant.res.plant_id = res.data;
+      var plantID = newPlant.res.plant_id;
+
+      console.log('$*# ! @ FACTORY, plantID: ', plantID);
       console.log('!FACTORY***: ', newPlant);
-      $http.post('/data/addplant')
+      for(var i = 0; i < plantID.length; i++) {
+        console.log(plantID[i]);
+        plantID = plantID[i].id;
+      };
+      console.log('+++ ==> @FACTORY plantID after for(): ', plantID);
+      newPlant.res.plant_id = plantID
+      console.log('! H E R E   I S   newPlant after everything:  ', newPlant);
+
+
+      $http.post('/gardenplants', newPlant).then(function(res) {
+        console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
+        getGarden(userID);
+      });
     });
   };
+
+  var getSearch = function(userSearch) {
+    console.log('%% ## $$ @FACTORY, userSearch: ', userSearch);
+    // $http.get('/search').then(function(res) {
+    //   console.log('*** SEARCH RESULTS: ', res);
+    // });
+  }
 
 
 
@@ -93,6 +121,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     getFormDetails: getFormDetails,
     formInfo: formInfo,
     newPlant: newPlant,
+    getSearch: getSearch,
     user: userData
 
   }
