@@ -7,6 +7,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var gardens = {};
   var formInfo = {};
   var newPlant = {};
+  var plantID = 0;
   var gardenID = 0;
   var userSearch = '';
   var searchResults = {};
@@ -33,6 +34,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   //   $http.get('/data/' + userID + '/gardenID').then()
   // }
 
+  // GET call to get user's plants in the specific garden
   var getGarden = function(userID) {
     $http.get('/data/' + userID).then(function(res) {
       // console.log('Here is the GARDEN: ', res.data);
@@ -43,7 +45,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       if(gardens.res) {
         var plantArray = gardens.res;
         gardenID = 0;
-        for(var i = 0; i < gardens.res.length; i++) {
+        for(var i = 0; i < plantArray.length; i++) {
           if(gardenID != plantArray[i].garden_id) {
             gardenID = plantArray[i].garden_id;
           }
@@ -56,7 +58,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       }
     });
   };
-
+  // GET call to get the variety options dynamically from the DB
   var getFormDetails = function(req) {
     $http.get('/form').then(function(res){
       formInfo.res = res.data;
@@ -64,6 +66,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     });
   }
 
+  // Posts new plant from the Create Plant form to the plant table in the DB
   var postPlant = function(createPlant) {
     createPlant.garden_id = gardens.res.garden_id;
     // createPlant.date_planted = createPlant.date_planted;
@@ -73,7 +76,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       newPlant.res = createPlant;
 
       newPlant.res.plant_id = res.data;
-      var plantID = newPlant.res.plant_id;
+      plantID = newPlant.res.plant_id;
 
       console.log('$*# ! @ FACTORY, plantID: ', plantID);
       console.log('!FACTORY***: ', newPlant);
@@ -85,14 +88,44 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       newPlant.res.plant_id = plantID
       console.log('! H E R E   I S   newPlant after everything:  ', newPlant);
 
+      postToGarden(newPlant);
+      console.log('BeFoRe -- #*# #*# NEWPLANT: ', newPlant);
+      newPlant = {};
+      console.log('AfTeR -- #*# #*# NEWPLANT: ', newPlant);
 
-      $http.post('/gardenplants', newPlant).then(function(res) {
-        console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
-        getGarden(userID);
-      });
     });
   };
 
+
+  // Takes user's request to "add" a plant from the search and stores the info in newPlant to be Posted to the garden_plants in the DB
+  var addSearchPlant = function (plant) {
+    console.log('^^^^^ PLANT: ', plant);
+    var res = {
+      garden_id: gardenID,
+      plant_id: plant.plantID,
+      date_planted: plant.datePlanted
+    }
+    newPlant = {
+      res: res
+    };
+    console.log('^^^%### newPlant @FACTORY in addSearchPlant: ', newPlant, 'Then postToGarden() will run HERE!!!');
+    postToGarden(newPlant);
+    newPlant = {};
+    console.log('#@FACTORY in addSearchPlant # newPlant after ==> : ', newPlant);
+  }
+
+
+  // POSTS plants to a user's garden
+  var postToGarden = function (newPlant) {
+    $http.post('/gardenplants', newPlant).then(function(res) {
+      console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
+      console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
+      getGarden(userID);
+    });
+  };
+
+
+  // GET call that searches the DB based on what user inputs in search
   var getSearch = function(userSearch) {
     console.log('%% ## $$ @FACTORY, userSearch: ', userSearch);
     if(userSearch.length > 0){
@@ -128,6 +161,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     newPlant: newPlant,
     getSearch: getSearch,
     searchResults: searchResults,
+    postToGarden: postToGarden,
+    addSearchPlant: addSearchPlant,
     user: userData
 
   }

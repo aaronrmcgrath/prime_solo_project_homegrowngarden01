@@ -42,21 +42,18 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
   var dataService = DataService;
   var createPlantObj = {};
 
-  $scope.search = '';
-
-  console.log('@CONTROLLER, $scope.search: ', $scope.search);
-  $scope.getSearch = function (search) {
-    dataService.getSearch(search);
-  };
-
-  $scope.searchResults = dataService.searchResults;
-
 
   // dataService.getFormDetails();
   $scope.formDetails = dataService.formInfo;
   console.log('### --- CONTROLLER formDetails: ', $scope.formDetails);
 
-
+  $scope.changeDate = function (date) {
+    console.log('@CONTROLLER DATE BEFORE: ', date);
+    date = date.toString();
+    date = date.slice(4, 15);
+    console.log('!## $ D A T E $ ##! ', date);
+    return date;
+  };
 
   $scope.submit = function(data) {
     dataService.postPlant(data);
@@ -64,4 +61,40 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
     // console.log('CONTROLLER - createPlantObj: ', createPlantObj);
   };
 
+}]);
+
+myApp.controller('SearchController', ['$scope', 'DataService', function($scope, DataService) {
+
+  var dataService = DataService;
+  $scope.search = '';
+
+  console.log('@CONTROLLER, $scope.search: ', $scope.search);
+  $scope.getSearch = function (search) {
+    if (search.length > 0) {
+      dataService.getSearch(search);
+    } else {
+      dataService.searchResults.results = [];
+    }
+  };
+
+  $scope.searchResults = dataService.searchResults;
+
+
+}]);
+
+myApp.controller('AddToGardenController', ['$scope', 'DataService', function($scope, DataService) {
+
+  var dataService = DataService;
+
+  $scope.addToGarden = function(plantID, datePlanted) {
+    // console.log('HERE IS index.id @ Controller: ', index.id);
+    // var plantID = index.id;
+    console.log('HERE IS plantID @ Controller: ', plantID);
+    var plant = {
+      plantID: plantID,
+      datePlanted: datePlanted
+    };
+    console.log('!@# P L A N T : : : ', plant);
+    dataService.addSearchPlant(plant);
+  };
 }]);

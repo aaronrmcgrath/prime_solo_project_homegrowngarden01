@@ -7,14 +7,6 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 myApp.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.
-      // when('/user', {
-      //   templateUrl: '/routes/user.html',
-      //   controller: 'UserController'
-      // }).
-      when('/home', {
-        templateUrl: '/assets/views/routes/home.html',
-        controller: 'UserController'
-      }).
       when('/garden', {
         templateUrl: '/assets/views/routes/garden.html',
         controller: 'UserController'
@@ -23,13 +15,19 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/assets/views/routes/addplant.html',
         controller: 'AddPlantController'
       }).
+      // when('/user', {
+      //   templateUrl: '/routes/user.html',
+      //   controller: 'UserController'
+      // }).
+      // when('/home', {
+      //   templateUrl: '/assets/views/routes/home.html',
+      //   controller: 'UserController'
+      // }).
+      // when('/assets/views/index.html', {
+      //   templateUrl: '/assets/views/index.html',
+      //   controller: 'HomeSearchController'
+      // }).
       otherwise({
         redirectTo: '/garden'
       });
 }]);
-
-
-// Trying to figure out how to load /garden route on default, not working!!!
-// myApp.run(['$routeProvider', function($routeProvider)  {
-//   $routeProvider.reload();
-// }]);

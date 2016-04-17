@@ -3,7 +3,7 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="search">
-        <md-content class="md-padding">
+        <md-content ng-controller="SearchController" class="md-padding">
           <h1 class="md-display-2">Search</h1>
 
           <form class="container search">
@@ -11,8 +11,18 @@
             <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }"  ng-change="getSearch(search)" placeholder="Search Plants"/>
           </form>
 
-          <div ng-repeat="plant in searchResults.results">
-            <p> {{ plant.plant_name }} </p>
+          <div ng-controller="AddToGardenController" ng-repeat="plant in searchResults.results">
+            <div>
+
+              <h3> {{ plant.plant_name }} </h3>
+              <p> {{ plant.plant_type }} </p>
+              <p> {{ plant.plant_variety }} </p>
+              <p> {{ plant.description }} </p>
+              <label>Date Planted</label>
+              <md-datepicker ng-model="plant.date_planted" md-placeholder="Enter date"></md-datepicker>
+              <md-button ng-click="addToGarden(plant.id, plant.date_planted)" class="md-raised md-primary">Add</md-button>
+
+            </div>
           </div>
 
           <!-- <div ng-repeat>
@@ -46,7 +56,8 @@
           </div>
           <div layout-get-xs="row" layout="column">
             <label>Date Planted</label>
-            <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date"></md-datepicker>
+            <md-datepicker ng-model="createPlantObj.date_planted" ng-change="changeDate(createPlantObj.date_planted)" md-placeholder="Enter date" ></md-datepicker>
+
           </div>
           <div>
 
@@ -58,7 +69,7 @@
 
         </div>
 
-          <md-button type="submit" class="md-raised md-primary submit">Create</md-button>
+          <md-button type="submit" class="md-raised md-primary submit">Create and Add</md-button>
 
         </form>
 

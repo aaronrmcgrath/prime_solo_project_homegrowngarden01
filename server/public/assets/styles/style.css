@@ -4,6 +4,14 @@ html, body, h1, h2, h3, ol, ul, li, a {
       margin: 0;
 }
 
+.header {
+  background: #97d677;
+}
+
+.garden-plants {
+  padding: 5px;
+  opacity: .9;
+}
 
 /*.main-nav-bar {
   background: green;

@@ -4,7 +4,24 @@
   <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
 
     <div>
-        <h3 id="garden" > {{ user.res.username }}'s Garden</h3>
-        <p ng-repeat="garden in gardens.res | filter:search" > {{ garden.plant_name }} </p>
+        <h1 id="garden" > {{ user.res.username }}'s Garden</h1>
+        <div class="garden-plants" ng-repeat="plant in gardens.res | filter:search" >
+
+          <h3> {{ plant.plant_name }} </h3>
+          <!-- <p> {{ plant.plant_type }} </p> -->
+          <p> {{ plant.plant_variety }} </p>
+          <p> {{ plant.description }} </p>
+          <p> {{ plant.date_planted }} </p>
+          <p> {{plant.notes}} </p>
+          <form ng-submit="update(plant)" layout-gt-sm="row" class="notes">
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Notes</label>
+              <input ng-model="plant.notes">
+            </md-input-container>
+            <md-button type="update">Add Notes</md-button>
+          </form>
+          <md-button type="Remove" class="md-raised md-primary">Remove</md-button>
+
+        </div>
     </div>
 </div>
