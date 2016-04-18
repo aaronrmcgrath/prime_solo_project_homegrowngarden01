@@ -145,16 +145,16 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var addNotes = function(notes) {
     // console.log('HEY, HEY, HEY, @FACTORY - notes: ', notes);
     $http.put('/gardenplants', notes).then(function(res) {
-      console.log(' NN OO TT EE SS == @FACTORY AFTER response from $http.post: ', res.data);
+      // console.log(' NN OO TT EE SS == @FACTORY AFTER response from $http.post: ', res.data);
       getGarden(userID);
     });
   };
 
   // DELETE call to DB to remove plant from User's Garden and the garden_plants table
   var deleteGardenPlant = function(plantID) {
-    console.log('*** ! D E L E T E ! @FACTORY - plantID: ', plantID);
+    // console.log('*** ! D E L E T E ! @FACTORY - plantID: ', plantID);
     $http.delete('/gardenplants/' + plantID).then(function(res) {
-      console.log('# ! ^^^^^ B A C K  @FACTORY - here is the response from gardenplant DELETE: ', res);
+      // console.log('# ! ^^^^^ B A C K  @FACTORY - here is the response from gardenplant DELETE: ', res);
       getGarden(userID);
     });
   }

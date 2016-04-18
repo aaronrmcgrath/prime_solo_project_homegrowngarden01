@@ -65,7 +65,11 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
     data.date_planted = changeDate(data.date_planted);
     dataService.postPlant(data);
     // console.log('CONTORLLER - HERE IS postPlant data: ', data);
-    // console.log('CONTROLLER - createPlantObj: ', createPlantObj);
+    // console.log('CONTROLLER - createPlantObj: ', $scope.createPlantObj);
+    $scope.createPlantObj = {};
+    // console.log('$$$ --- == @CONTROLLER createPlantObj after clear: ', $scope.createPlantObj);
+
+    // $scope.userForm.$setPristine();
   };
 
 }]);
@@ -103,7 +107,7 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
     dateA = date.slice(0, 6);
     date = dateA + ',' + ' ' + dateB;
 
-    console.log('!## $ D A T E $ ##! ', date);
+    // console.log('!## $ D A T E $ ##! ', date);
     return date;
   };
 
@@ -112,7 +116,7 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
     // console.log('HERE IS index.id @ Controller: ', index.id);
     // var plantID = index.id;
     datePlanted = changeDate(datePlanted);
-    console.log('HERE IS plantID @ Controller: ', plantID);
+    // console.log('HERE IS plantID @ Controller: ', plantID);
     var plant = {
       plantID: plantID,
       datePlanted: datePlanted
@@ -133,7 +137,7 @@ myApp.controller('UpdatePlantController', ['$scope', 'DataService', function($sc
     }
 
     var newNotes = existingNotes + ' ' + notes;
-    console.log('!!! @CONTROLLER *** NOTES UPDATED!!! : ', newNotes);
+    // console.log('!!! @CONTROLLER *** NOTES UPDATED!!! : ', newNotes);
     var noteObj = {
       plant_id: id,
       notes: newNotes
@@ -149,7 +153,7 @@ myApp.controller('RemovePlantController', ['$scope', 'DataService', function($sc
   var dataService = DataService;
 
   $scope.removePlant = function(plantID) {
-    console.log('###@CONTROLLER - removePlant(plantID): ====>', plantID);
+    // console.log('###@CONTROLLER - removePlant(plantID): ====>', plantID);
     dataService.deleteGardenPlant(plantID);
   };
 }]);

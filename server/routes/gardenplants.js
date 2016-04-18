@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var connectionString = require('../modules/connection.js');
 var pg = require('pg');
+var path = require('path');
 
 
 
@@ -33,9 +34,12 @@ router.post('/', function(req, res, next){
       } else {
         console.log(result.rows);
         res.json(result.rows); // Sending back An object in an array in an object as a key of res in the mother object... work on later
+        // res.sendFile(path.resolve(__dirname, '../public/assets/views/users.html#/garden'));
+
       }
     });
   });
+
 
 });
 
@@ -76,7 +80,7 @@ router.put('/', function(req, res, next){
 // SECOND POST after creating new plant, updates specific garden
 router.delete('/:id', function(req, res, next){
 
-  console.log('!# @ SERVER -- TESTING garden_plants D E L E T E from DB - req.params.id: ', req.params.id);
+  // console.log('!# @ SERVER -- TESTING garden_plants D E L E T E from DB - req.params.id: ', req.params.id);
   var req = req.params;
 
   var deletePlant = {

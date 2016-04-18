@@ -15,12 +15,12 @@
             <div>
 
               <h3> {{ plant.plant_name }} </h3>
-              <p> {{ plant.plant_type }} </p>
+              <!-- <p> {{ plant.plant_type }} </p> -->
               <p> {{ plant.plant_variety }} </p>
               <p> {{ plant.description }} </p>
               <label>Date Planted</label>
               <md-datepicker ng-model="plant.date_planted" md-placeholder="Enter date"></md-datepicker>
-              <md-button ng-click="addToGarden(plant.id, plant.date_planted)" class="md-raised md-primary">Add</md-button>
+              <md-button ng-click="addToGarden(plant.id, plant.date_planted)" class="md-raised md-primary" href="#garden">Add</md-button>
 
             </div>
           </div>
@@ -70,7 +70,7 @@
 
         </div>
 
-          <md-button type="submit" class="md-raised md-primary submit">Create and Add</md-button>
+          <md-button type="submit" class="md-raised md-primary submit" >Create and Add</md-button>
 
         </form>
 
