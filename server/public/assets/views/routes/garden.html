@@ -4,7 +4,7 @@
   <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
 
   <div>
-    <h1 id="garden" > {{ user.res.username }}'s Garden</h1>
+    <h1 id="garden" > {{ user.res.first_name }}'s Garden</h1>
     <div class="removed" ng-controller="RemovePlantController">
 
       <div ng-controller="UpdatePlantController" class="garden-plants" ng-repeat="plant in gardens.res | filter:search" >

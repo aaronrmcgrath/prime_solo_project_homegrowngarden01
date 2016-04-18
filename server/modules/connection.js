@@ -17,7 +17,7 @@ if(process.env.DATABASE_URL != undefined) {
 // TODO *** CREATE DB HERE! So when hosted it will create dynamically ***
 
 // CREATE DB AND TABLES IF DB DOES NOT EXIST
-/*
+
 pg.connect(connectionString, function(err, client, done){
 
   // var user = 'CREATE TABLE IF NOT EXISTS "user" (id SERIAL PRIMARY KEY, username varchar(80) NOT NULL, password varchar(100) NOT NULL, first_name varchar(80) NOT NULL, last_name varchar(80));';
@@ -26,24 +26,53 @@ pg.connect(connectionString, function(err, client, done){
     console.log('Error connecting to DB!', err);
     // TODO end process with error code
   } else {
-    var query = client.query('CREATE TABLE IF NOT EXISTS "user" ' +
+    var query = client.query('CREATE TABLE IF NOT EXISTS "users" ' +
     '(id SERIAL PRIMARY KEY,' +
     'username varchar(80) NOT NULL,' +
     'password varchar(100) NOT NULL,' +
     'first_name varchar(80) NOT NULL,' +
     'last_name varchar(80));' +
-    'CREATE TABLE IF NOT EXISTS "gardens" ( ' +
-    'id SERIAL PRIMARY KEY,' +
-    '"user" int NOT NULL,' +
-    'name varchar(80));' +
+    'CREATE TABLE IF NOT EXISTS gardens' +
+    '(id SERIAL PRIMARY KEY,' +
+    'user_id int,' +
+    'name varchar(80),' +
+    'CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES "users"(id));' +
     'CREATE TABLE IF NOT EXISTS plant_type' +
     '(id SERIAL PRIMARY KEY,' +
-    'type varchar(80));'
+    'type varchar(80));' +/*
+    'INSERT INTO plant_type (type)' +
+    "VALUES ('Fruit');" +
+    'INSERT INTO plant_type (type)' +
+    "VALUES ('Vegetable');" +
+    'INSERT INTO plant_type (type)' +
+    "VALUES ('Herb');" +*/
+    'CREATE TABLE IF NOT EXISTS watering_level' +
+    '(id SERIAL PRIMARY KEY,' +
+    'watering_level varchar(80));' +
+    'INSERT INTO watering_level (watering_level)' +/*
+    "VALUES ('Low');" +
+    'INSERT INTO watering_level (watering_level)' +
+    "VALUES ('Medium');" +
+    'INSERT INTO watering_level (watering_level)' +
+    "VALUES ('High');" +*/
     'CREATE TABLE IF NOT EXISTS plants' +
     '(id SERIAL PRIMARY KEY,' +
     'plant_name varchar(80),' +
-    'plant_type in )'
-  );
+    'plant_type int,' +
+    'plant_variety varchar(80),' +
+    'description varchar(140),' +
+    'watering_level int,' +
+    'CONSTRAINT type FOREIGN KEY (plant_type) REFERENCES plant_type(id),' +
+    'CONSTRAINT watering_level FOREIGN KEY (watering_level) REFERENCES watering_level(id));' +
+    'CREATE TABLE IF NOT EXISTS garden_plants' +
+    '(id SERIAL PRIMARY KEY,' +
+    'garden int,' +
+    'plant int,' +
+    'date_planted varchar(80),' +
+    'date_harvested varchar(80),' +
+    'notes varchar(300),' +
+    'CONSTRAINT garden FOREIGN KEY (garden) REFERENCES gardens(id),' +
+    'CONSTRAINT plant FOREIGN KEY (plant) REFERENCES plants(id));');
 
   query.on('end', function() {
     console.log('successfully ensured schema exists');
@@ -57,6 +86,6 @@ pg.connect(connectionString, function(err, client, done){
   });
   }
 });
-*/
+
 
 module.exports = connectionString;

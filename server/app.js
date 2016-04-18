@@ -18,6 +18,7 @@ var data = require('./routes/data');
 var form = require('./routes/form');
 var gardenPlants = require('./routes/gardenplants');
 var search = require('./routes/search');
+var newGarden = require('./routes/newgarden');
 // var updatePlant = require('./routes/updateplant');
 
 
@@ -45,6 +46,7 @@ app.use('/data', data);
 app.use('/form', form);
 app.use('/gardenplants', gardenPlants);
 app.use('/search', search);
+app.use('/newgarden', newGarden);
 // app.use('/updateplant', updatePlant);
 app.use('/', index);
 

@@ -15,7 +15,9 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var getUser = function(req) {
     $http.get('/user').then(function(res) {
 
-      // console.log('***', res.data);
+
+
+      console.log('*** || U S E R || ', res.data);
       // if(res.data) {
       userData.res = res.data;
       userID = userData.res.id;
@@ -42,19 +44,37 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       // console.log('Here is the GARDEN: ', res.data);
 
       gardens.res = res.data;
-      console.log('*! -- gardens!!: ', gardens);
+      // var plantArray = garden.res;
+      console.log('** ## ! -- User garden!!: ', gardens.res);
+      console.log('^^^ H E R E  I S  userData: ==> ', userData);
+
+
 
       if(gardens.res) {
         var plantArray = gardens.res;
         gardenID = 0;
+
         for(var i = 0; i < plantArray.length; i++) {
           if(gardenID != plantArray[i].garden_id) {
             gardenID = plantArray[i].garden_id;
+
+
+            if(gardenID == 0){
+              $http.post('/newgarden', userData).then(function(res) {
+                console.log('ooo * ! * @FACTORY newgarden post response: ', res.data);
+                gardenID = 1;
+              });
+            }
+
+            console.log('_____||| gardenID: ', gardenID);
+
+
           }
         }
-        // console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
+        console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
         gardens.res.garden_id = gardenID;
         console.log('$ FACTORY, here is the garden.res: ', gardens.res);
+
       } else {
         console.log('FAILED MAKING GARDENID!!!');
       }
