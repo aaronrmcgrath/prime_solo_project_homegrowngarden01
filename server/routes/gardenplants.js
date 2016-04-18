@@ -40,4 +40,68 @@ router.post('/', function(req, res, next){
 });
 
 
+// PUT for updating after creating new plant, updates specific garden plant notes and date harvested, etc...
+router.put('/', function(req, res, next){
+
+  // console.log('@@@ SERVER TESTING notes update - save to DB - req.body: ', req.body);
+  var req = req.body;
+
+  var updatePlant = {
+    id: req.plant_id,
+    notes: req.notes
+  };
+  var results = [];
+
+  console.log('@SERVER data.js save plant to SPECIFIC Garden:', updatePlant);
+
+  pg.connect(connectionString, function(err, client, done){
+    client.query('UPDATE garden_plants SET notes = $1 WHERE id = ($2) RETURNING id;', [updatePlant.notes, updatePlant.id],
+    function (err, result) {
+      done();
+
+      if(err) {
+        console.log('Error inserting data: ', err);
+        res.send(false);
+      } else {
+        console.log(result.rows);
+        res.json(result.rows); // Sending back An object in an array in an object as a key of res in the mother object... work on later
+      }
+    });
+  });
+
+});
+
+
+// DELETE gardenplant from User's garden and garden_plants table in DB
+// SECOND POST after creating new plant, updates specific garden
+router.delete('/:id', function(req, res, next){
+
+  console.log('!# @ SERVER -- TESTING garden_plants D E L E T E from DB - req.params.id: ', req.params.id);
+  var req = req.params;
+
+  var deletePlant = {
+    id: req.id,
+  };
+  var results = [];
+
+  console.log('@SERVER gardenplants.js DELETE plant from User Garden:', deletePlant);
+
+  pg.connect(connectionString, function(err, client, done){
+    client.query('DELETE FROM garden_plants WHERE id = $1;', [deletePlant.id],
+    function (err, result) {
+      done();
+
+      if(err) {
+        console.log('Error inserting data: ', err);
+        res.send(false);
+      } else {
+        console.log(result);
+        res.json(result); // Sending back An object in an array in an object as a key of res in the mother object... work on later
+      }
+    });
+  });
+
+});
+
+
 module.exports = router;

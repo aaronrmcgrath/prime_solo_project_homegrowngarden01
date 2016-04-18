@@ -3,25 +3,36 @@
 
   <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
 
-    <div>
-        <h1 id="garden" > {{ user.res.username }}'s Garden</h1>
-        <div class="garden-plants" ng-repeat="plant in gardens.res | filter:search" >
+  <div>
+    <h1 id="garden" > {{ user.res.username }}'s Garden</h1>
+    <div class="removed" ng-controller="RemovePlantController">
 
-          <h3> {{ plant.plant_name }} </h3>
-          <!-- <p> {{ plant.plant_type }} </p> -->
-          <p> {{ plant.plant_variety }} </p>
-          <p> {{ plant.description }} </p>
-          <p> {{ plant.date_planted }} </p>
-          <p> {{plant.notes}} </p>
-          <form ng-submit="update(plant)" layout-gt-sm="row" class="notes">
+      <div ng-controller="UpdatePlantController" class="garden-plants" ng-repeat="plant in gardens.res | filter:search" >
+
+        <h3> {{ plant.plant_name }} </h3>
+        <!-- <p> {{ plant.plant_type }} </p> -->
+        <p> {{ plant.plant_variety }} </p>
+        <p> {{ plant.description }} </p>
+        <p>Planted on {{ plant.date_planted }} </p>
+        <!-- <p> {{ plant.notes }} </p> -->
+        <div class="notes">
+          <div>
+            <h4>NOTES</h4>
+            <p> {{ plant.notes }} </p>
+          </div>
+          <div layout="row">
             <md-input-container class="md-block" flex-gt-xs>
-              <label>Notes</label>
-              <input ng-model="plant.notes">
-            </md-input-container>
-            <md-button type="update">Add Notes</md-button>
-          </form>
-          <md-button type="Remove" class="md-raised md-primary">Remove</md-button>
+              <label>Add Notes</label>
 
+              <input ng-model="notes">
+            </md-input-container>
+            <md-button ng-click="updatePlant(notes, plant.notes, plant.garden_plants_id)" >Update</md-button>
+          </div>
         </div>
+      <md-button type="Remove" ng-click="removePlant(plant.garden_plants_id)" class="md-raised md-primary">Remove</md-button>
     </div>
+
+
+    </div>
+  </div>
 </div>

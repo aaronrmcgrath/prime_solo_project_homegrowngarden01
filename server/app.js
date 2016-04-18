@@ -18,6 +18,7 @@ var data = require('./routes/data');
 var form = require('./routes/form');
 var gardenPlants = require('./routes/gardenplants');
 var search = require('./routes/search');
+// var updatePlant = require('./routes/updateplant');
 
 
 app.use(bodyParser.json());
@@ -44,6 +45,7 @@ app.use('/data', data);
 app.use('/form', form);
 app.use('/gardenplants', gardenPlants);
 app.use('/search', search);
+// app.use('/updateplant', updatePlant);
 app.use('/', index);
 
 

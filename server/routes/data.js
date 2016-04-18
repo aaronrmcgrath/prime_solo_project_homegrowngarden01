@@ -28,7 +28,7 @@ router.get('/:id', function (req, res) {
     // var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
 
     // LEFT JOIN to grab everything and GROUP BY user.id and garden.id then aggregate the plant data
-    var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id, plants.plant_variety, plants.description, garden_plants.date_planted FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user = $1;', [userID]);
+    var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id, plants.plant_variety, plants.description, garden_plants.date_planted, garden_plants.notes FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user = $1 ORDER BY garden_plants_id;', [userID]);
     // need to try and add a GROUP BY gardens.id at some point -- this did work for getting info back: * GROUP BY gardens.id, gardens.name, plants.plant_name, garden_plants.id *
 
     query.on('row', function(row) {

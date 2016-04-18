@@ -8,7 +8,7 @@
 
           <form class="container search">
             <label>SEARCH</label>
-            <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }"  ng-change="getSearch(search)" placeholder="Search Plants"/>
+            <input type="search" ng-model="search" ng-model-options="{ debounce: 750 }"  ng-change="getSearch(search)" placeholder="Search Plants"/>
           </form>
 
           <div ng-controller="AddToGardenController" ng-repeat="plant in searchResults.results">
@@ -56,7 +56,8 @@
           </div>
           <div layout-get-xs="row" layout="column">
             <label>Date Planted</label>
-            <md-datepicker ng-model="createPlantObj.date_planted" ng-change="changeDate(createPlantObj.date_planted)" md-placeholder="Enter date" ></md-datepicker>
+            <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date" ></md-datepicker>
+            <!-- ng-change="changeDate(createPlantObj.date_planted)"  -->
 
           </div>
           <div>

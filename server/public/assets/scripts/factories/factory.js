@@ -22,7 +22,9 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       getGarden(userID);
       getFormDetails();
       // user.id = res.data.id;
-      console.log('User: ', userData);
+
+      // *** userData Console.log here v
+      // console.log('User: ', userData);
       // } else {
       // $window.location.href = 'assets/views/index.html';
       //$location.path = '/';
@@ -50,7 +52,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
             gardenID = plantArray[i].garden_id;
           }
         }
-        console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
+        // console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
         gardens.res.garden_id = gardenID;
         console.log('$ FACTORY, here is the garden.res: ', gardens.res);
       } else {
@@ -58,6 +60,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       }
     });
   };
+
+
   // GET call to get the variety options dynamically from the DB
   var getFormDetails = function(req) {
     $http.get('/form').then(function(res){
@@ -78,13 +82,13 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       newPlant.res.plant_id = res.data;
       plantID = newPlant.res.plant_id;
 
-      console.log('$*# ! @ FACTORY, plantID: ', plantID);
+      // console.log('$*# ! @ FACTORY, plantID: ', plantID);
       console.log('!FACTORY***: ', newPlant);
       for(var i = 0; i < plantID.length; i++) {
         console.log(plantID[i]);
         plantID = plantID[i].id;
       };
-      console.log('+++ ==> @FACTORY plantID after for(): ', plantID);
+      // console.log('+++ ==> @FACTORY plantID after for(): ', plantID);
       newPlant.res.plant_id = plantID
       console.log('! H E R E   I S   newPlant after everything:  ', newPlant);
 
@@ -99,7 +103,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
   // Takes user's request to "add" a plant from the search and stores the info in newPlant to be Posted to the garden_plants in the DB
   var addSearchPlant = function (plant) {
-    console.log('^^^^^ PLANT: ', plant);
+    // console.log('^^^^^ PLANT: ', plant);
     var res = {
       garden_id: gardenID,
       plant_id: plant.plantID,
@@ -108,7 +112,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     newPlant = {
       res: res
     };
-    console.log('^^^%### newPlant @FACTORY in addSearchPlant: ', newPlant, 'Then postToGarden() will run HERE!!!');
+    // console.log('^^^%### newPlant @FACTORY in addSearchPlant: ', newPlant, 'Then postToGarden() will run HERE!!!');
     postToGarden(newPlant);
     newPlant = {};
     console.log('#@FACTORY in addSearchPlant # newPlant after ==> : ', newPlant);
@@ -119,7 +123,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var postToGarden = function (newPlant) {
     $http.post('/gardenplants', newPlant).then(function(res) {
       console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
-      console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
+      // console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
       getGarden(userID);
     });
   };
@@ -127,17 +131,33 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
   // GET call that searches the DB based on what user inputs in search
   var getSearch = function(userSearch) {
-    console.log('%% ## $$ @FACTORY, userSearch: ', userSearch);
+    // console.log('%% ## $$ @FACTORY, userSearch: ', userSearch);
     if(userSearch.length > 0){
       $http.get('/search/' + userSearch).then(function(res) {
-        console.log('*** SEARCH RESULTS: ', res);
+        // console.log('*** SEARCH RESULTS: ', res);
         searchResults.results = res.data;
         console.log('!* # # @FACTORY searchResults: ', searchResults);
       });
     };
   };
 
+  // Updates plant in User's garden and sends a PUT call to the DB in table garden_plants
+  var addNotes = function(notes) {
+    // console.log('HEY, HEY, HEY, @FACTORY - notes: ', notes);
+    $http.put('/gardenplants', notes).then(function(res) {
+      console.log(' NN OO TT EE SS == @FACTORY AFTER response from $http.post: ', res.data);
+      getGarden(userID);
+    });
+  };
 
+  // DELETE call to DB to remove plant from User's Garden and the garden_plants table
+  var deleteGardenPlant = function(plantID) {
+    console.log('*** ! D E L E T E ! @FACTORY - plantID: ', plantID);
+    $http.delete('/gardenplants/' + plantID).then(function(res) {
+      console.log('# ! ^^^^^ B A C K  @FACTORY - here is the response from gardenplant DELETE: ', res);
+      getGarden(userID);
+    });
+  }
 
   // var postUser = function (data) {
   //   $http.post('/register').then(function (res) {
@@ -163,6 +183,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     searchResults: searchResults,
     postToGarden: postToGarden,
     addSearchPlant: addSearchPlant,
+    addNotes: addNotes,
+    deleteGardenPlant: deleteGardenPlant,
     user: userData
 
   }
