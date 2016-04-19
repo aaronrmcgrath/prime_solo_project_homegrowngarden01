@@ -8,9 +8,9 @@ if(process.env.DATABASE_URL != undefined) {
   pg.defaults.ssl = true;
   connetionString = process.env.DATABASE_URL;
 } else {
-  connectionString = 'postgres://localhost:5432/homegrown'
+  // connectionString = 'postgres://localhost:5432/homegrown'
   //TEST DB
-  // connectionString = 'postgres://localhost:5432/homegrownTest'
+  connectionString = 'postgres://localhost:5432/homegrownTest'
 
 }
 
@@ -39,17 +39,21 @@ pg.connect(connectionString, function(err, client, done){
     'CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES "users"(id));' +
     'CREATE TABLE IF NOT EXISTS plant_type' +
     '(id SERIAL PRIMARY KEY,' +
-    'type varchar(80));' +/*
+    'type varchar(80));' +
+                                                        // insert into tablename (code) values ('1448523')
+                                                        // WHERE not exists(select * from tablename where code='1448523')
+
     'INSERT INTO plant_type (type)' +
-    "VALUES ('Fruit');" +
+    "VALUES ('Fruit')" +
+    'WHERE NOT EXISTS;' + /* 
     'INSERT INTO plant_type (type)' +
     "VALUES ('Vegetable');" +
     'INSERT INTO plant_type (type)' +
     "VALUES ('Herb');" +*/
     'CREATE TABLE IF NOT EXISTS watering_level' +
     '(id SERIAL PRIMARY KEY,' +
-    'watering_level varchar(80));' +
-    'INSERT INTO watering_level (watering_level)' +/*
+    'watering_level varchar(80));' +/*
+    'INSERT INTO watering_level (watering_level)' +
     "VALUES ('Low');" +
     'INSERT INTO watering_level (watering_level)' +
     "VALUES ('Medium');" +

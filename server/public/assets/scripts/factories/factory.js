@@ -58,18 +58,11 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
           if(gardenID != plantArray[i].garden_id) {
             gardenID = plantArray[i].garden_id;
 
-
-            if(gardenID == 0){
-              $http.post('/newgarden', userData).then(function(res) {
-                console.log('ooo * ! * @FACTORY newgarden post response: ', res.data);
-                gardenID = 1;
-              });
-            }
-
-            console.log('_____||| gardenID: ', gardenID);
-
-
           }
+            console.log('$^^^ U S E R  D A T A  @ FACTORY: ', userData);
+            // $http.post('/newgarden', userData).then(function(res) {
+            //   console.log('ooo * ! * @FACTORY newgarden post response: ', res.data);
+            //   console.log('_____||| gardenID: ', gardenID);
         }
         console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
         gardens.res.garden_id = gardenID;

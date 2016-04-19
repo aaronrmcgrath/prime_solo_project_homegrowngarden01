@@ -44,6 +44,7 @@ router.get('/:id', function (req, res) {
       done();
       return res.json(results);
     });
+
     if(err) {
       console.log(err);
 
