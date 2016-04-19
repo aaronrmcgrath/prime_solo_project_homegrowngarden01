@@ -1,4 +1,4 @@
-<div class="garden" ng-controller="UserController">
+<md-content layout-padding class="garden" ng-controller="UserController">
 
 
   <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
@@ -29,10 +29,10 @@
             <md-button ng-click="updatePlant(notes, plant.notes, plant.garden_plants_id)" >Update</md-button>
           </div>
         </div>
-      <md-button type="Remove" ng-click="removePlant(plant.garden_plants_id)" class="md-raised md-primary">Remove</md-button>
+      <md-button type="Remove" ng-click="removePlant(plant.garden_plants_id)" class="md-raised md-warn">Remove</md-button>
     </div>
 
 
     </div>
   </div>
-</div>
+</md-content>
