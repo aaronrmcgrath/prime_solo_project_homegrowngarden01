@@ -8,9 +8,10 @@ if(process.env.DATABASE_URL != undefined) {
   pg.defaults.ssl = true;
   connetionString = process.env.DATABASE_URL;
 } else {
-  // connectionString = 'postgres://localhost:5432/homegrown'
-  //TEST DB
-  connectionString = 'postgres://localhost:5432/homegrownTest'
+  // LOCAL DB
+  connectionString = 'postgres://localhost:5432/homegrown'
+  // TEST DB
+  // connectionString = 'postgres://localhost:5432/homegrownTest'
 
 }
 
@@ -45,7 +46,7 @@ pg.connect(connectionString, function(err, client, done){
 
     'INSERT INTO plant_type (type)' +
     "VALUES ('Fruit')" +
-    'WHERE NOT EXISTS;' + /* 
+    'WHERE NOT EXISTS;' + /*
     'INSERT INTO plant_type (type)' +
     "VALUES ('Vegetable');" +
     'INSERT INTO plant_type (type)' +
