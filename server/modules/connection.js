@@ -43,10 +43,10 @@ pg.connect(connectionString, function(err, client, done){
     'type varchar(80));' +
                                                         // insert into tablename (code) values ('1448523')
                                                         // WHERE not exists(select * from tablename where code='1448523')
-
+    /*
     'INSERT INTO plant_type (type)' +
     "VALUES ('Fruit')" +
-    'WHERE NOT EXISTS;' + /*
+    'WHERE NOT EXISTS;' +
     'INSERT INTO plant_type (type)' +
     "VALUES ('Vegetable');" +
     'INSERT INTO plant_type (type)' +
