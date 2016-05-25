@@ -87,7 +87,7 @@ pg.connect(connectionString, function(err, client, done){
 
   query.on('error', function() {
     console.log('Error creating schema!');
-    // TODO exit(1)
+    // TODO exit(1) - find error
     done();
   });
   }
