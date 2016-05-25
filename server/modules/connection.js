@@ -7,6 +7,7 @@ var connectionString = '';
 if(process.env.DATABASE_URL != undefined) {
   pg.defaults.ssl = true;
   connetionString = process.env.DATABASE_URL;
+  console.log('Here is process.env.DATABASE_URL: ', process.env.DATABASE_URL);
 } else {
   // LOCAL DB
   connectionString = 'postgres://localhost:5432/homegrown'
