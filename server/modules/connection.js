@@ -1,18 +1,19 @@
 // CONNECTION file
 
-
+var dotenv = require('dotenv').config();
+var dbConnectionString = process.env.dbConnectionString;
 var pg = require('pg');
 var connectionString = '';
 
-if(process.env.DATABASE_URL) {
+if(process.env.DATABASE_URL != undefined) {
   pg.defaults.ssl = true;
-  connetionString = process.env.DATABASE_URL;
+  connetionString = dbConnectionString;
   console.log('Here is process.env.DATABASE_URL: ', process.env.DATABASE_URL);
 } else {
   // LOCAL DB
-  connectionString = 'postgres://localhost:5432/homegrown'
+  connectionString = 'postgres://localhost:5432/homegrown';
   // TEST DB
-  // connectionString = 'postgres://localhost:5432/homegrownTest'
+  // connectionString = 'postgres://localhost:5432/homegrownTest';
 
 }
 
