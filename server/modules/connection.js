@@ -4,7 +4,7 @@
 var pg = require('pg');
 var connectionString = '';
 
-if(process.env.DATABASE_URL != undefined) {
+if(process.env.DATABASE_URL) {
   pg.defaults.ssl = true;
   connetionString = process.env.DATABASE_URL;
   console.log('Here is process.env.DATABASE_URL: ', process.env.DATABASE_URL);
