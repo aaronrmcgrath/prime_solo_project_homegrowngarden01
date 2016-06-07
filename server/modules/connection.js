@@ -1,7 +1,7 @@
 // CONNECTION file
 
-var dotenv = require('dotenv').config();
-var dbConnectionString = process.env.dbConnectionString;
+// var dotenv = require('dotenv').config();
+// var dbConnectionString = process.env.dbConnectionString;
 var pg = require('pg');
 var connectionString = '';
 
