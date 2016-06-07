@@ -5,7 +5,7 @@
 var pg = require('pg');
 var connectionString;
 
-if(process.env.DATABASE_URL != undefined) {
+if(process.env.HEROKU_POSTGRESQL_CYAN_URL != undefined) {
 
   // pg.defaults.ssl = true;
 
