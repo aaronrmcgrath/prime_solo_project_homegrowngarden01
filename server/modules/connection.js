@@ -12,7 +12,8 @@ if(process.env.DATABASE_URL != undefined) {
   // connectionString = process.env.DATABASE_URL;
   // connectionString = HEROKU_POSTGRESQL_CYAN_URL;
   // connetionString = dbConnectionString;
-  connectionString = process.env.DATABASE_URL + '?sslmode=require';
+  connectionString = process.env.HEROKU_POSTGRESQL_CYAN_URL + '?sslmode=require';
+  // connectionString = process.env.DATABASE_URL + '?sslmode=require';
 
   console.log('Here is process.env.DATABASE_URL: ', process.env.DATABASE_URL);
   console.log('Here is connectionString: ', connectionString);
