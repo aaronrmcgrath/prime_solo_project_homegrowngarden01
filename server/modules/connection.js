@@ -5,7 +5,7 @@ var dbConnectionString = process.env.dbConnectionString;
 var pg = require('pg');
 var connectionString = '';
 
-if(process.env.DATABASE_URL) {
+if(process.env.DATABASE_URL != undefined) {
   connectionString = HEROKU_POSTGRESQL_CYAN_URL;
 
   // pg.defaults.ssl = true;
