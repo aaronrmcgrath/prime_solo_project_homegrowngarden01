@@ -34,7 +34,7 @@ pg.connect(connectionString, function(err, client, done){
 
   if (err) {
     console.log('Error connecting to DB!', err);
-    console.log('connectionString: ', connectionString);
+    console.log('Error - connectionString: ', connectionString);
     // TODO end process with error code
   } else {
     console.log('CONNECTING TO DB pg.connect - Made it here, did not get error and about to create tables if not exist!');
