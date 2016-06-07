@@ -9,8 +9,8 @@ if(process.env.DATABASE_URL != undefined) {
 
   pg.defaults.ssl = true;
 
-    // connectionString = process.env.DATABASE_URL;
-    connectionString = HEROKU_POSTGRESQL_CYAN_URL;
+  connectionString = process.env.DATABASE_URL;
+  // connectionString = HEROKU_POSTGRESQL_CYAN_URL;
   // connetionString = dbConnectionString;
   // connectionString = process.env.DATABASE_URL + '?sslmode=require';
 
