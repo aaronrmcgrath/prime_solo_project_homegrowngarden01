@@ -5,9 +5,13 @@ var dbConnectionString = process.env.dbConnectionString;
 var pg = require('pg');
 var connectionString = '';
 
-if(process.env.DATABASE_URL != undefined) {
-  pg.defaults.ssl = true;
-  connetionString = dbConnectionString;
+if(process.env.DATABASE_URL) {
+  connectionString = HEROKU_POSTGRESQL_CYAN_URL;
+
+  // pg.defaults.ssl = true;
+  // connetionString = dbConnectionString;
+  // connectionString = process.env.DATABASE_URL + '?sslmode=require';
+
   console.log('Here is process.env.DATABASE_URL: ', process.env.DATABASE_URL);
   console.log('Here is connectionString: ', connectionString);
 } else {
