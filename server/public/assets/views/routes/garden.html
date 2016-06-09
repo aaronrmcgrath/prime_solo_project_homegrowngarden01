@@ -1,30 +1,30 @@
-<md-content layout-padding class="garden" ng-controller="UserController">
 
+<md-content layout-padding class="garden" layout="column" layout-align="center center"
+ng-controller="UserController">
+  <h1 id="garden" > {{ user.res.first_name }}'s Garden</h1>
 
-  <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Plants"/>
+  <md-input-container class="search">
+    <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Garden"/>
+  </md-input-container>
 
   <div>
-    <h1 id="garden" > {{ user.res.first_name }}'s Garden</h1>
-    <div class="removed" ng-controller="RemovePlantController">
+    <div flex="none" class="removed garden" ng-controller="RemovePlantController">
 
-      <div ng-controller="UpdatePlantController" class="garden-plants" ng-repeat="plant in gardens.res | filter:search" >
+      <md-content class="garden-plants" ng-controller="UpdatePlantController"
+      ng-repeat="plant in gardens.res | filter:search" >
 
-        <md-card>
+        <md-card flex="none" class="garden-plant">
           <!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
           <md-card-title>
             <md-card-title-text>
-              <span class="md-headline"> {{ plant.plant_name }} </span>
+              <span class="md-display-2"  layout="row" layout-align="center"> {{ plant.plant_name }} </span>
+              <span class="md-headline" layout="row" layout-align="center"> {{ plant.plant_variety }} </span>
             </md-card-title-text>
           </md-card-title>
-          <md-card-actions layout="row" layout-align="start center">
-          </md-card-actions>
           <md-card-content>
-
-            <!-- <h3> {{ plant.plant_name }} </h3> -->
             <!-- <p> {{ plant.plant_type }} </p> -->
-            <p> {{ plant.plant_variety }} </p>
-            <p> {{ plant.description }} </p>
             <p>Planted on {{ plant.date_planted }} </p>
+            <p> {{ plant.description }} </p>
             <!-- <p> {{ plant.notes }} </p> -->
             <div class="notes">
               <div>
@@ -32,22 +32,21 @@
                 <p> {{ plant.notes }} </p>
               </div>
               <div layout="row">
-                <md-input-container class="md-block" flex-gt-xs>
+                <md-input-container class="md-accent md-block" flex-gt-xs>
                   <label>Add Notes</label>
 
                   <input ng-model="notes">
                 </md-input-container>
-                <md-button ng-click="updatePlant(notes, plant.notes, plant.garden_plants_id)" >Update</md-button>
               </div>
+              <md-button class="md-raised md-accent" ng-click="updatePlant(notes, plant.notes, plant.garden_plants_id)" >Add Note</md-button>
             </div>
-            <md-button type="Remove" ng-click="removePlant(plant.garden_plants_id)" class="md-raised md-warn">Remove</md-button>
-
+            <div layout="row" layout-align="end">
+              <md-button type="Remove" ng-click="removePlant(plant.garden_plants_id)" class="md-warn">Remove</md-button>
+            </div>
           </md-card-content>
         </md-card>
 
-
-      </div>
-
+      </md-content>
 
     </div>
   </div>

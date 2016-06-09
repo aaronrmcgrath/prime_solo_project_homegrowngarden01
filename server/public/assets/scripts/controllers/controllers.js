@@ -34,7 +34,19 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   //     });
 
 
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('lime', {
+        'default': '300'
+      });
+});
 
 
 myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope, DataService) {
@@ -72,7 +84,19 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
     // $scope.userForm.$setPristine();
   };
 
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('lime', {
+        'default': '300'
+      });
+});
 
 myApp.controller('SearchController', ['$scope', 'DataService', function($scope, DataService) {
 
@@ -91,7 +115,19 @@ myApp.controller('SearchController', ['$scope', 'DataService', function($scope, 
   $scope.searchResults = dataService.searchResults;
 
 
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('lime', {
+        'default': '300'
+      });
+});
 
 myApp.controller('AddToGardenController', ['$scope', 'DataService', function($scope, DataService) {
 
@@ -124,7 +160,19 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
     console.log('!@# P L A N T : : : ', plant);
     dataService.addSearchPlant(plant);
   };
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('light-green', {
+        'default': '300'
+      });
+});
 
 // Update plants info in User's Garden
 myApp.controller('UpdatePlantController', ['$scope', 'DataService', function($scope, DataService) {
@@ -145,7 +193,19 @@ myApp.controller('UpdatePlantController', ['$scope', 'DataService', function($sc
     dataService.addNotes(noteObj);
   };
 
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('lime', {
+        'default': '300'
+      });
+});
 
 // Captures plant ID to remove from DOM with a DELETE Call to DB
 myApp.controller('RemovePlantController', ['$scope', 'DataService', function($scope, DataService) {
@@ -156,4 +216,16 @@ myApp.controller('RemovePlantController', ['$scope', 'DataService', function($sc
     // console.log('###@CONTROLLER - removePlant(plantID): ====>', plantID);
     dataService.deleteGardenPlant(plantID);
   };
-}]);
+}])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('green', {
+        'default': '500',
+        'hue-1': '300',
+        'hue-2': '300',
+        'hue-3': '300'
+      })
+      .accentPalette('lime', {
+        'default': '300'
+      });
+});
