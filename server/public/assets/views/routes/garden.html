@@ -1,5 +1,5 @@
 
-<md-content layout-padding class="garden" layout="column" layout-align="center center"
+<md-content class="garden" layout="column" layout-align="center center"
 ng-controller="UserController">
   <h1 id="garden" > {{ user.res.first_name }}'s Garden</h1>
 
@@ -8,16 +8,16 @@ ng-controller="UserController">
   </md-input-container>
 
   <div>
-    <div flex="none" class="removed garden" ng-controller="RemovePlantController">
+    <div class="removed plants" ng-controller="RemovePlantController">
 
       <md-content class="garden-plants" ng-controller="UpdatePlantController"
       ng-repeat="plant in gardens.res | filter:search" >
 
-        <md-card flex="none" class="garden-plant">
+        <md-card class="garden-plant">
           <!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
           <md-card-title>
             <md-card-title-text>
-              <span class="md-display-2"  layout="row" layout-align="center"> {{ plant.plant_name }} </span>
+              <span class="md-display-2"  layout="row" layout-align="center start"> {{ plant.plant_name }} </span>
               <span class="md-headline" layout="row" layout-align="center"> {{ plant.plant_variety }} </span>
             </md-card-title-text>
           </md-card-title>

@@ -12,16 +12,16 @@ html, body, h1, h2, h3, ol, ul, li, a {
   background-size: cover;
 }
 
-.garden {
+.plants {
+  background-color: blue;
+}
 
+.page-title {
+  color: green;
 }
 
 .garden-plants {
-  width: 100%;
-  background-color: #aed581;
-  margin: 60%;
-  padding: 5px;
-  opacity: .9;
+
 }
 
 .garden-plant {
