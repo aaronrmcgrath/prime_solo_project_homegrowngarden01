@@ -11,7 +11,7 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   // console.log();
   $scope.gardens = dataService.gardens;
   // console.log('Controller userObject *: ', $scope.user);
-  // console.log('*** ===!> Controller gardens: ', $scope.gardens);
+  // console.log('*** ===!> Controller gardens.res: ', $scope.gardens.res);
 
   // dataService.getGarden($scope.user.id);
 

@@ -9,9 +9,9 @@
     <md-content layout="column" layout-align="center none"  class="removed plants" ng-controller="RemovePlantController">
 
       <md-content class="garden-plants" ng-controller="UpdatePlantController"
-      ng-repeat="plant in gardens.res | filter:search" ng-if="garden.res">
+      ng-repeat="plant in gardens.res | filter:search" >
 
-        <md-card class="garden-plant">
+        <md-card class="garden-plant" >
           <!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
           <md-card-title>
             <md-card-title-text>
