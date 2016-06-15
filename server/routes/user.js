@@ -9,7 +9,7 @@ var path = require('path');
 router.get('/', function(req, res) {
   // Is the user logged in?
   if(req.isAuthenticated()) {
-    console.log('from user.js ***: ', req.user);
+    // console.log('from user.js ***: ', req.user);
     // send back user object from DB
     var user = {
       id: req.user.id,
@@ -25,16 +25,5 @@ router.get('/', function(req, res) {
   }
 });
 
-// Handle successful logins ??? --- From Scott's codebase, not sure if I need it, probably to verify log in
-// router.get('/name', function(req,res,next){
-//     console.log('Hi class! ', req.isAuthenticated());
-//     var resUser = {
-//         username: req.user.username,
-//         firstname: req.user.firstname,
-//         lastname: req.user.lastname,
-//         datecreated: req.user.lastlogin
-//     };
-//     res.json(resUser);
-// });
 
 module.exports = router;

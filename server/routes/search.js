@@ -16,7 +16,8 @@ router.get('/:search', function (req, res) {
 
   pg.connect(connectionString, function(err, client, done) {
 
-    var query = client.query('SELECT * FROM plants WHERE plant_name iLIKE $1;', [search]);
+    var query = client.query('SELECT * FROM plants WHERE plant_name iLIKE $1 OR ' +
+    'plant_variety iLIKE $1 OR description iLIKE $1;', [search]);
 
     query.on('row', function(row) {
       results.push(row);
