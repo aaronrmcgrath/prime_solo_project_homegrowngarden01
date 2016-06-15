@@ -108,13 +108,15 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       postToGarden(newPlant);
       // console.log('BeFoRe -- #*# #*# NEWPLANT: ', newPlant);
       newPlant = {};
+      searchResults = {};
       // console.log('AfTeR -- #*# #*# NEWPLANT: ', newPlant);
 
     });
   };
 
 
-  // Takes user's request to "add" a plant from the search and stores the info in newPlant to be Posted to the garden_plants in the DB
+  // Takes user's request to "add" a plant from the search and stores the
+  // info in newPlant to be Posted to the garden_plants in the DB
   var addSearchPlant = function (plant) {
     // console.log('^^^^^ PLANT: ', plant);
     var res = {
@@ -138,6 +140,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       // console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
       // console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
       getGarden(userID);
+      searchResults = {};
     });
   };
 

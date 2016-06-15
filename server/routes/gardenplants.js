@@ -21,7 +21,7 @@ router.post('/', function(req, res, next){
   };
   var results = [];
 
-  console.log('@SERVER data.js save plant to SPECIFIC Garden:', gardenPlant);
+  console.log('@SERVER gardenplants.js save plant to SPECIFIC Garden:', gardenPlant);
 
   pg.connect(connectionString, function(err, client, done){
     client.query('INSERT INTO garden_plants (garden, plant, date_planted) VALUES ($1, $2, $3) RETURNING id;', [gardenPlant.garden, gardenPlant.plant, gardenPlant.date_planted],

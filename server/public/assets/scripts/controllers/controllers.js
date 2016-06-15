@@ -86,7 +86,7 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
     $scope.createPlantObj = {};
     // console.log('$$$ --- == @CONTROLLER createPlantObj after clear: ', $scope.createPlantObj);
 
-    // $scope.userForm.$setPristine();
+    $scope.search.$setPristine();
   };
 
 }])
@@ -164,6 +164,8 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
     };
     // console.log('!@# P L A N T : : : ', plant);
     dataService.addSearchPlant(plant);
+    $scope.search = '';
+    $scope.searchResults = {};
   };
 }])
   .config(function($mdThemingProvider) {
@@ -185,6 +187,11 @@ myApp.controller('UpdatePlantController', ['$scope', 'DataService', function($sc
   var dataService = DataService;
 
   $scope.updatePlant = function(notes, existingNotes, id) {
+
+    if(notes === undefined) {
+      notes = '';
+    }
+
     if(existingNotes == null) {
       existingNotes = '';
     }
@@ -221,6 +228,7 @@ myApp.controller('RemovePlantController', ['$scope', 'DataService', function($sc
     // console.log('###@CONTROLLER - removePlant(plantID): ====>', plantID);
     dataService.deleteGardenPlant(plantID);
   };
+
 }])
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')

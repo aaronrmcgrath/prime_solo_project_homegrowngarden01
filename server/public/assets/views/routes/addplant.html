@@ -29,7 +29,7 @@
             <!-- <p> {{ plant.plant_type }} </p> -->
             <p> {{ plant.description }} </p>
             <label>Date Planted</label>
-            <md-datepicker ng-model="plant.date_planted" md-placeholder="Enter date"></md-datepicker>
+            <md-datepicker ng-model="plant.date_planted" md-placeholder="Enter date" required></md-datepicker>
             <md-content layout-align="center center">
               <md-button ng-click="addToGarden(plant.id, plant.date_planted)"
               class="md-raised md-primary" href="#garden">Add</md-button>
@@ -54,7 +54,7 @@
       <div layout-gt-xs="row" layout="column" layout-align="center center">
         <md-input-container class="md-block" flex-gt-xs>
           <label>Plant Name</label>
-          <input ng-model="createPlantObj.plant_name">
+          <input ng-model="createPlantObj.plant_name" required>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-xs>
@@ -65,18 +65,19 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Description</label>
-          <input ng-model="createPlantObj.description">
+          <input ng-model="createPlantObj.description" required>
         </md-input-container>
       </div>
       <div layout-get-xs="row" layout="column">
         <label>Date Planted</label>
-        <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date" ></md-datepicker>
+        <md-datepicker ng-model="createPlantObj.date_planted" md-placeholder="Enter date" required></md-datepicker>
         <!-- ng-change="changeDate(createPlantObj.date_planted)"  -->
 
       </div>
       <div>
 
-        <md-select placeholder="Plant Type" ng-model="createPlantObj.type" md-on-open="getFormDetails()" layout-gt-xs="row">
+        <md-select placeholder="Plant Type" ng-model="createPlantObj.type"
+        md-on-open="getFormDetails()" layout-gt-xs="row" required>
           <md-option ng-value="type" ng-repeat="type in formDetails.res">{{type.type}}</md-option>
         </md-select>
 
