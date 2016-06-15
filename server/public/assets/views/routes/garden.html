@@ -1,14 +1,12 @@
 
-<md-content class="garden" layout="column" layout-align="center center"
-ng-controller="UserController">
+<md-content class="garden" ng-controller="UserController">
   <h1 id="garden" > {{ user.res.first_name }}'s Garden</h1>
 
-  <md-input-container class="search">
+  <md-input-container class="search" >
     <input type="text" ng-model="search" ng-model-options="{ debounce: 750 }" placeholder="Search Garden"/>
   </md-input-container>
 
-  <div>
-    <div class="removed plants" ng-controller="RemovePlantController">
+    <md-content layout="column" layout-align="center none"  class="removed plants" ng-controller="RemovePlantController">
 
       <md-content class="garden-plants" ng-controller="UpdatePlantController"
       ng-repeat="plant in gardens.res | filter:search" >
@@ -48,6 +46,6 @@ ng-controller="UserController">
 
       </md-content>
 
-    </div>
-  </div>
+    </md-content>
+
 </md-content>

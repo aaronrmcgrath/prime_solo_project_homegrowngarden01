@@ -8,12 +8,18 @@ var path = require('path');
 // Post - handles user log in, Is successful or is not...
 router.post('/', passport.authenticate('local', {
   successRedirect: '/assets/views/routes/user.html',
-  failureRedirect: '/assets/views/routes/failure.html' // Can add a failure to login page here
+  failureRedirect: '/assets/views/routes/failure.html'
 }));
 
 //User Get
 router.get('/users', function(req, res, next) {
   res.sendFile(path.resolve(__dirname, '../public/assets/views/users.html'));
+});
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+    console.log('@ SERVER - Logged Out!');
 });
 
 // General/wildcard Get

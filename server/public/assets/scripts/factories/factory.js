@@ -17,7 +17,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
 
 
-      console.log('*** || U S E R || ', res.data);
+      // console.log('*** || U S E R || ', res.data);
       // if(res.data) {
       userData.res = res.data;
       userID = userData.res.id;
@@ -45,8 +45,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
 
       gardens.res = res.data;
       // var plantArray = garden.res;
-      console.log('** ## ! -- User garden!!: ', gardens.res);
-      console.log('^^^ H E R E  I S  userData: ==> ', userData);
+      // console.log('** ## ! -- User garden!!: ', gardens.res);
+      // console.log('^^^ H E R E  I S  userData: ==> ', userData);
 
 
 
@@ -59,14 +59,14 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
             gardenID = plantArray[i].garden_id;
 
           }
-            console.log('$^^^ U S E R  D A T A  @ FACTORY: ', userData);
+            // console.log('$^^^ U S E R  D A T A  @ FACTORY: ', userData);
             // $http.post('/newgarden', userData).then(function(res) {
             //   console.log('ooo * ! * @FACTORY newgarden post response: ', res.data);
             //   console.log('_____||| gardenID: ', gardenID);
         }
-        console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
+        // console.log('!# @ FACTORY, here is gardenID: * === >', gardenID);
         gardens.res.garden_id = gardenID;
-        console.log('$ FACTORY, here is the garden.res: ', gardens.res);
+        // console.log('$ FACTORY, here is the garden.res: ', gardens.res);
 
       } else {
         console.log('FAILED MAKING GARDENID!!!');
@@ -79,7 +79,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var getFormDetails = function(req) {
     $http.get('/form').then(function(res){
       formInfo.res = res.data;
-      console.log('!!! @ FACTORY - GET for form: ', formInfo);
+      // console.log('!!! @ FACTORY - GET for form: ', formInfo);
     });
   }
 
@@ -87,7 +87,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
   var postPlant = function(createPlant) {
     createPlant.garden_id = gardens.res.garden_id;
     // createPlant.date_planted = createPlant.date_planted;
-    console.log('@FACTORY- createPlant: ', createPlant);
+    // console.log('@FACTORY- createPlant: ', createPlant);
 
     $http.post('/data', createPlant).then(function(res) {
       newPlant.res = createPlant;
@@ -96,19 +96,19 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       plantID = newPlant.res.plant_id;
 
       // console.log('$*# ! @ FACTORY, plantID: ', plantID);
-      console.log('!FACTORY***: ', newPlant);
+      // console.log('!FACTORY***: ', newPlant);
       for(var i = 0; i < plantID.length; i++) {
-        console.log(plantID[i]);
+        // console.log(plantID[i]);
         plantID = plantID[i].id;
       };
       // console.log('+++ ==> @FACTORY plantID after for(): ', plantID);
       newPlant.res.plant_id = plantID
-      console.log('! H E R E   I S   newPlant after everything:  ', newPlant);
+      // console.log('! H E R E   I S   newPlant after everything:  ', newPlant);
 
       postToGarden(newPlant);
-      console.log('BeFoRe -- #*# #*# NEWPLANT: ', newPlant);
+      // console.log('BeFoRe -- #*# #*# NEWPLANT: ', newPlant);
       newPlant = {};
-      console.log('AfTeR -- #*# #*# NEWPLANT: ', newPlant);
+      // console.log('AfTeR -- #*# #*# NEWPLANT: ', newPlant);
 
     });
   };
@@ -128,14 +128,14 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     // console.log('^^^%### newPlant @FACTORY in addSearchPlant: ', newPlant, 'Then postToGarden() will run HERE!!!');
     postToGarden(newPlant);
     newPlant = {};
-    console.log('#@FACTORY in addSearchPlant # newPlant after ==> : ', newPlant);
+    // console.log('#@FACTORY in addSearchPlant # newPlant after ==> : ', newPlant);
   }
 
 
   // POSTS plants to a user's garden
   var postToGarden = function (newPlant) {
     $http.post('/gardenplants', newPlant).then(function(res) {
-      console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
+      // console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
       // console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
       getGarden(userID);
     });
@@ -149,7 +149,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       $http.get('/search/' + userSearch).then(function(res) {
         // console.log('*** SEARCH RESULTS: ', res);
         searchResults.results = res.data;
-        console.log('!* # # @FACTORY searchResults: ', searchResults);
+        // console.log('!* # # @FACTORY searchResults: ', searchResults);
       });
     };
   };
@@ -171,6 +171,14 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       getGarden(userID);
     });
   }
+
+  // Logs the user out and directs them to the main page
+  var logout = function(){
+    console.log('HH EE LL LL OO !!!!!!');
+    $http.get('/logout').then(function(response) {
+      $window.location.href = '/';
+    });
+  };
 
   // var postUser = function (data) {
   //   $http.post('/register').then(function (res) {
@@ -198,7 +206,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     addSearchPlant: addSearchPlant,
     addNotes: addNotes,
     deleteGardenPlant: deleteGardenPlant,
-    user: userData
+    user: userData,
+    logout: logout
 
   }
 

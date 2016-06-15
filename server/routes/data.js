@@ -2,58 +2,106 @@
 
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+var path = require('path');
 var connectionString = require('../modules/connection.js');
 var pg = require('pg');
 
 
 // GET for Garden Data
-router.get('/:id', function (req, res) {
+// Verifies whether a user is logged in or not
+router.get('/:id', function(req, res) {
+  if(req.isAuthenticated()) {
+    var userID = req.params.id;
+    console.log('*SERVER userID for getGarden:', userID);
+    var results = [];
+    // res.send(req.user);
 
-  var userID = req.params.id;
-  console.log('*SERVER userID for getGarden:', userID);
-  var results = [];
+    pg.connect(connectionString, function(err, client, done) {
+      // var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1;', [userID]);
 
-  // TODO NEED TO STOP SERVER FROM CRASHING WHEN USER ISN'T LOGGED IN
+      // var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
 
-  // if(userID === undefined) {
-  //   router.get('/', function(req, res) {
-  //     console.log('User not logged in');
-  //     return res.send('User not logged in');
-  //   });
-  // };
+      // LEFT JOIN to grab everything and GROUP BY user.id and garden.id then aggregate the plant data
+      var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id, plants.plant_variety, plants.description, garden_plants.date_planted, garden_plants.notes FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user_id = $1 ORDER BY garden_plants_id;', [userID]);
+      // need to try and add a GROUP BY gardens.id at some point -- this did work for getting info back: * GROUP BY gardens.id, gardens.name, plants.plant_name, garden_plants.id *
 
-  pg.connect(connectionString, function(err, client, done) {
-    // var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1;', [userID]);
+      query.on('row', function(row) {
+        results.push(row);
+        console.log('Server Garden GET! :', results);
+      });
 
-    // var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
+      query.on('err', function(err) {
+        console.log(err);
+      });
 
-    // LEFT JOIN to grab everything and GROUP BY user.id and garden.id then aggregate the plant data
-    var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id, plants.plant_variety, plants.description, garden_plants.date_planted, garden_plants.notes FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user_id = $1 ORDER BY garden_plants_id;', [userID]);
-    // need to try and add a GROUP BY gardens.id at some point -- this did work for getting info back: * GROUP BY gardens.id, gardens.name, plants.plant_name, garden_plants.id *
+      query.on('end', function() {
+        done();
+        return res.json(results);
+      });
 
-    query.on('row', function(row) {
-      results.push(row);
-      console.log('Server Garden GET! :', results);
+      if(err) {
+        console.log(err);
+
+      }
     });
 
-    query.on('err', function(err) {
-      console.log(err);
-    });
-
-    query.on('end', function() {
-      done();
-      return res.json(results);
-    });
-
-    if(err) {
-      console.log(err);
-
-    }
-  });
-
-  // res.send(res.data);
-  // console.log('Server Garden GET! :', res.data);
+  } else {
+    var file = req.params[0] || '/assets/views/index.html';
+    res.sendFile(path.join(__dirname, '../public', file));
+    // res.send(false);
+  }
 });
+
+// router.get('/:id', function (req, res) {
+//
+//   var userID = req.params.id;
+//   console.log('*SERVER userID for getGarden:', userID);
+//   var results = [];
+//
+//   // TODO NEED TO STOP SERVER FROM CRASHING WHEN USER ISN'T LOGGED IN
+//
+//   if(userID == undefined) {
+//     // router.get('/', function(req, res) {
+//     //   console.log('User not logged in');
+//     //   return res.send('User not logged in', response);
+//     // });
+//
+//
+//   };
+//
+//   pg.connect(connectionString, function(err, client, done) {
+//     // var query = client.query('SELECT name FROM gardens WHERE gardens.user = $1;', [userID]);
+//
+//     // var query = client.query('SELECT plants.plant_name, gardens.name, garden_plants.id FROM plants JOIN garden_plants ON plants.id = garden_plants.plant JOIN gardens ON garden_plants.garden = gardens.id WHERE gardens.user = $1;', [userID]);
+//
+//     // LEFT JOIN to grab everything and GROUP BY user.id and garden.id then aggregate the plant data
+//     var query = client.query('SELECT gardens.id AS garden_id, gardens.name, plants.plant_name, garden_plants.id AS garden_plants_id, plants.plant_variety, plants.description, garden_plants.date_planted, garden_plants.notes FROM gardens LEFT JOIN garden_plants ON gardens.id = garden_plants.garden LEFT JOIN plants ON garden_plants.plant = plants.id WHERE gardens.user_id = $1 ORDER BY garden_plants_id;', [userID]);
+//     // need to try and add a GROUP BY gardens.id at some point -- this did work for getting info back: * GROUP BY gardens.id, gardens.name, plants.plant_name, garden_plants.id *
+//
+//     query.on('row', function(row) {
+//       results.push(row);
+//       console.log('Server Garden GET! :', results);
+//     });
+//
+//     query.on('err', function(err) {
+//       console.log(err);
+//     });
+//
+//     query.on('end', function() {
+//       done();
+//       return res.json(results);
+//     });
+//
+//     if(err) {
+//       console.log(err);
+//
+//     }
+//   });
+//
+//   // res.send(res.data);
+//   // console.log('Server Garden GET! :', res.data);
+// });
 
 
 

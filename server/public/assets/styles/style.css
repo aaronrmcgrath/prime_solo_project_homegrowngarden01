@@ -12,6 +12,10 @@ html, body, h1, h2, h3, ol, ul, li, a {
   background-size: cover;
 }
 
+.list{
+  margin: auto;
+}
+
 .plants {
   background-color: blue;
 }

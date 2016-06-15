@@ -10,8 +10,8 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   $scope.user = dataService.user;
   // console.log();
   $scope.gardens = dataService.gardens;
-  console.log('Controller userObject *: ', $scope.user);
-  console.log('*** ===!> Controller gardens: ', $scope.gardens);
+  // console.log('Controller userObject *: ', $scope.user);
+  // console.log('*** ===!> Controller gardens: ', $scope.gardens);
 
   // dataService.getGarden($scope.user.id);
 
@@ -32,6 +32,11 @@ myApp.controller('UserController', ['$scope', 'DataService', function($scope, Da
   //             //$location.path = '/';
   //         }
   //     });
+
+  $scope.logout = function() {
+    // console.log('~~~ooo @@@ UserController in logout()!');
+    dataService.logout();
+  }
 
 
 }])
@@ -103,7 +108,7 @@ myApp.controller('SearchController', ['$scope', 'DataService', function($scope, 
   var dataService = DataService;
   $scope.search = '';
 
-  console.log('@CONTROLLER, $scope.search: ', $scope.search);
+  // console.log('@CONTROLLER, $scope.search: ', $scope.search);
   $scope.getSearch = function (search) {
     if (search.length > 0) {
       dataService.getSearch(search);
@@ -157,7 +162,7 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
       plantID: plantID,
       datePlanted: datePlanted
     };
-    console.log('!@# P L A N T : : : ', plant);
+    // console.log('!@# P L A N T : : : ', plant);
     dataService.addSearchPlant(plant);
   };
 }])

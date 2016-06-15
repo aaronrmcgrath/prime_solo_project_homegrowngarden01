@@ -1,6 +1,6 @@
 // PRE-LOGIN FACTORY
 
-homeApp.factory('SearchService', ['$http', function($http) {
+homeApp.factory('SearchService', '$window' ['$http', '$window', function($http) {
 
 
   var homeSearch = '';
@@ -17,6 +17,13 @@ homeApp.factory('SearchService', ['$http', function($http) {
       });
     };
   };
+
+  // Logs the user out and directs them to the main page
+  // var logout = function(){
+  //   $http.get('/logout').then(function(response) {
+  //     $window.location.href = '/';
+  //   });
+  // };
 
   return {
     getSearch: getSearch,
