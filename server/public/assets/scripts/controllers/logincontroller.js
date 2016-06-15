@@ -1,6 +1,6 @@
 // PRE-LOGIN CONTROLLER
 
-console.log('HELLO, logincontroller!');
+// console.log('HELLO, logincontroller!');
 var homeApp = angular.module('myApp', []);
 
 homeApp.controller('HomeSearchController', ['$scope', 'SearchService', function($scope, SearchService) {

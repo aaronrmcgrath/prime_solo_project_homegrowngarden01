@@ -11,7 +11,7 @@ router.get('/:search', function (req, res) {
 
   var search = req.params.search;
   search = '%' + search + '%';
-  console.log('*** @SERVER, search:', search);
+  // console.log('*** @SERVER, search:', search);
   var results = [];
 
   pg.connect(connectionString, function(err, client, done) {

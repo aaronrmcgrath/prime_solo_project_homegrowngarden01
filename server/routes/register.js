@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
   var results = [];
   var userGardenName = req.body.firstname;
 
-  console.log('New User: ', saveUser);
+  // console.log('New User: ', saveUser);
 
   pg.connect(connection, function(err, client, done) {
     var query = client.query('INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id;',
@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
       query.on('row', function(row) {
         results.push(row);
 
-        console.log('ooo @Server New User returning ID in row (after results.push(row))! :', results);
+        // console.log('ooo @Server New User returning ID in row (after results.push(row))! :', results);
 
         for(var i = 0; i < results.length; i++) {
           userID = results[i].id;

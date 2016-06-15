@@ -1,6 +1,6 @@
 // CLIENT APP
 
-console.log('Client.js working!!!');
+// console.log('Client.js working!!!');
 var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 

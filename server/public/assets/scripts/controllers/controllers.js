@@ -85,8 +85,6 @@ myApp.controller('AddPlantController', ['$scope', 'DataService', function($scope
     // console.log('CONTROLLER - createPlantObj: ', $scope.createPlantObj);
     $scope.createPlantObj = {};
     // console.log('$$$ --- == @CONTROLLER createPlantObj after clear: ', $scope.createPlantObj);
-
-    $scope.search.$setPristine();
   };
 
 }])
@@ -162,10 +160,15 @@ myApp.controller('AddToGardenController', ['$scope', 'DataService', function($sc
       plantID: plantID,
       datePlanted: datePlanted
     };
+
     // console.log('!@# P L A N T : : : ', plant);
-    dataService.addSearchPlant(plant);
+
+
     $scope.search = '';
-    $scope.searchResults = {};
+    $scope.getSearch($scope.search);
+
+    dataService.addSearchPlant(plant);
+
   };
 }])
   .config(function($mdThemingProvider) {

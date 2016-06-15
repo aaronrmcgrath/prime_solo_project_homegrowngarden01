@@ -11,7 +11,7 @@ var path = require('path');
 // SECOND POST after creating new plant, updates specific garden
 router.post('/', function(req, res, next){
 
-  console.log('TESTING garden_plants save to DB - req.body: ', req.body);
+  // console.log('TESTING garden_plants save to DB - req.body: ', req.body);
   var req = req.body;
 
   var gardenPlant = {

@@ -13,7 +13,7 @@ var pg = require('pg');
 router.get('/:id', function(req, res) {
   if(req.isAuthenticated()) {
     var userID = req.params.id;
-    console.log('*SERVER userID for getGarden:', userID);
+    // console.log('*SERVER userID for getGarden:', userID);
     var results = [];
     // res.send(req.user);
 

@@ -109,6 +109,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       // console.log('BeFoRe -- #*# #*# NEWPLANT: ', newPlant);
       newPlant = {};
       searchResults = {};
+      searchResults.results = [];
       // console.log('AfTeR -- #*# #*# NEWPLANT: ', newPlant);
 
     });
@@ -127,6 +128,7 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
     newPlant = {
       res: res
     };
+
     // console.log('^^^%### newPlant @FACTORY in addSearchPlant: ', newPlant, 'Then postToGarden() will run HERE!!!');
     postToGarden(newPlant);
     newPlant = {};
@@ -140,7 +142,6 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
       // console.log('*!! @ FACTORY, response from adding new plant to garden: ', res.data);
       // console.log('POST ### gardenID in postToGarden() @ FACTORY: ', gardenID);
       getGarden(userID);
-      searchResults = {};
     });
   };
 
@@ -154,6 +155,8 @@ myApp.factory('DataService', ['$http', '$window', function($http, $window) {
         searchResults.results = res.data;
         // console.log('!* # # @FACTORY searchResults: ', searchResults);
       });
+    } else {
+      searchResults = {};
     };
   };
 

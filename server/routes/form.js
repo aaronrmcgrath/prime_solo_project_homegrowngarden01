@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
     query.on('row', function(row) {
       formResults.push(row);
-      console.log('Server Garden GET! :', formResults);
+      // console.log('Server Garden GET! :', formResults);
     });
 
     query.on('err', function(err) {
